@@ -8,10 +8,10 @@
   ],
   "repository": {
     "bat-tagged-template": {
-      "begin": "(^|[^\\w`])\\b(bat)(`)",
+      "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(lang\\.)?(bat)\\s*(`)",
       "beginCaptures": {
         "1": {
-          "name": "punctuation.whitespace.template.begin.ts"
+          "name": "entity.name.function.ts"
         },
         "2": {
           "name": "entity.name.function.ts"

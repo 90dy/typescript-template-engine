@@ -8,10 +8,10 @@
   ],
   "repository": {
     "ini-tagged-template": {
-      "begin": "(^|[^\\w`])\\b(ini)(`)",
+      "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(lang\\.)?(ini)\\s*(`)",
       "beginCaptures": {
         "1": {
-          "name": "punctuation.whitespace.template.begin.ts"
+          "name": "entity.name.function.ts"
         },
         "2": {
           "name": "entity.name.function.ts"

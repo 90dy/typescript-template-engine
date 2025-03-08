@@ -104,10 +104,10 @@ function generateSyntaxConfig(langKey: string, langDef: typeof LANGUAGES[keyof t
     ],
     repository: {
       [`${extension}-tagged-template`]: {
-        begin: "(^|[^\\w`])\\b(" + langKey + ")(`)",
+        begin: "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(lang\\.)?(" + langKey + ")\\s*(`)",
         beginCaptures: {
           1: {
-            name: "punctuation.whitespace.template.begin.ts"
+            name: "entity.name.function.ts"
           },
           2: {
             name: "entity.name.function.ts"

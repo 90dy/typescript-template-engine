@@ -8,10 +8,10 @@
   ],
   "repository": {
     "lua-tagged-template": {
-      "begin": "(^|[^\\w`])\\b(lua)(`)",
+      "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(lang\\.)?(lua)\\s*(`)",
       "beginCaptures": {
         "1": {
-          "name": "punctuation.whitespace.template.begin.ts"
+          "name": "entity.name.function.ts"
         },
         "2": {
           "name": "entity.name.function.ts"

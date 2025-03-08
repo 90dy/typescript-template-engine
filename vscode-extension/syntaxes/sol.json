@@ -8,10 +8,10 @@
   ],
   "repository": {
     "sol-tagged-template": {
-      "begin": "(^|[^\\w`])\\b(sol)(`)",
+      "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(lang\\.)?(sol)\\s*(`)",
       "beginCaptures": {
         "1": {
-          "name": "punctuation.whitespace.template.begin.ts"
+          "name": "entity.name.function.ts"
         },
         "2": {
           "name": "entity.name.function.ts"

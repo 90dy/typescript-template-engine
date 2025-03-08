@@ -8,10 +8,10 @@
   ],
   "repository": {
     "php-tagged-template": {
-      "begin": "(^|[^\\w`])\\b(php)(`)",
+      "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(lang\\.)?(php)\\s*(`)",
       "beginCaptures": {
         "1": {
-          "name": "punctuation.whitespace.template.begin.ts"
+          "name": "entity.name.function.ts"
         },
         "2": {
           "name": "entity.name.function.ts"
