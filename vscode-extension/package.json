@@ -1,0 +1,103 @@
+{
+  "name": "ts-template-vscode",
+  "displayName": "TypeScript Template Engine",
+  "description": "Syntax highlighting for template literals in TypeScript",
+  "version": "0.1.0",
+  "publisher": "90dy",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/90dy/ts-template"
+  },
+  "scripts": {
+    "generate-syntaxes": "deno run --allow-read --allow-write generate-syntaxes.ts",
+    "package": "vsce package"
+  },
+  "contributes": {
+    "grammars": [
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.html.template",
+        "path": "./syntaxes/html.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.html": "html"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.css.template",
+        "path": "./syntaxes/css.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.css": "css"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.js.template",
+        "path": "./syntaxes/js.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.javascript": "javascript"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.sql.template",
+        "path": "./syntaxes/sql.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.sql": "sql"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.json.template",
+        "path": "./syntaxes/json.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.json": "json"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.md.template",
+        "path": "./syntaxes/md.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.markdown": "markdown"
+        }
+      }
+    ]
+  }
+}

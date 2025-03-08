@@ -1,0 +1,26 @@
+{
+  "tasks": {
+    "dev": "deno run --watch main.ts",
+    "test": "deno test",
+    "build:extension": "cd vscode-extension && vsce package",
+    "demo": "deno run main.ts",
+    "generate:syntaxes": "cd vscode-extension && deno run --allow-read --allow-write generate-syntaxes.ts",
+    "generate:tests": "deno run --allow-read --allow-write src/test-utils.ts"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1"
+  },
+  "name": "ts-template",
+  "version": "0.1.0",
+  "description": "TypeScript as a template engine through template literals",
+  "author": "90dy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/90dy/ts-template"
+  },
+  "exports": {
+    ".": "./src/mod.ts",
+    "./core": "./src/core/mod.ts"
+  }
+}

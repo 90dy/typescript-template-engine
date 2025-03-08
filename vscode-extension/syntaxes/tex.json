@@ -1,0 +1,41 @@
+{
+  "fileTypes": [],
+  "injectionSelector": "L:source.ts, L:source.tsx, L:source.js, L:source.jsx",
+  "patterns": [
+    {
+      "include": "#tex-tagged-template"
+    }
+  ],
+  "repository": {
+    "tex-tagged-template": {
+      "begin": "(^|[^\\w`])\\b(tex)(`)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.whitespace.template.begin.ts"
+        },
+        "2": {
+          "name": "entity.name.function.ts"
+        },
+        "3": {
+          "name": "punctuation.definition.string.template.begin.ts"
+        }
+      },
+      "end": "`",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.template.end.ts"
+        }
+      },
+      "contentName": "meta.embedded.block.tex",
+      "patterns": [
+        {
+          "include": "source.ts#template-substitution-element"
+        },
+        {
+          "include": "text.tex.latex"
+        }
+      ]
+    }
+  },
+  "scopeName": "inline.tex.template"
+}

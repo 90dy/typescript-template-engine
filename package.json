@@ -1,0 +1,47 @@
+{
+  "name": "ts-template",
+  "version": "0.1.0",
+  "description": "TypeScript as a template engine through template literals",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "jest",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "typescript",
+    "template",
+    "template-literals",
+    "syntax-highlighting",
+    "html",
+    "css",
+    "javascript",
+    "sql",
+    "markdown"
+  ],
+  "author": "90dy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/90dy/ts-template"
+  },
+  "bugs": {
+    "url": "https://github.com/90dy/ts-template/issues"
+  },
+  "homepage": "https://github.com/90dy/ts-template#readme",
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^9.0.3",
+    "@semantic-release/npm": "^10.0.3",
+    "semantic-release": "^21.0.5"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}
