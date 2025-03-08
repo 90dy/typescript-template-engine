@@ -1,6 +1,6 @@
-# TypeScript Template Engine (ts-template)
+# TypeScript Template Tag Functions (ts-tag)
 
-A TypeScript library that enables using TypeScript as a template engine through template literals. This project provides tools for syntax highlighting various file extensions within template literals in VSCode.
+A TypeScript library that provides template tag functions for syntax highlighting and code generation. This project enables using TypeScript template literals with proper syntax highlighting for various file formats in VSCode.
 
 ## Features
 
@@ -15,16 +15,16 @@ A TypeScript library that enables using TypeScript as a template engine through 
 
 ```bash
 # Using npm
-npm install ts-template
+npm install ts-tag
 
-# Using Deno
-import { html, css, js } from "https://deno.land/x/ts_template/mod.ts";
+# Using Deno/JSR
+import { html, css, js } from "jsr:@90dy/ts-tag";
 ```
 
 ## Usage
 
 ```typescript
-import { html, css, js, sql } from "ts-template";
+import { html, css, js, sql } from "ts-tag";
 
 // HTML with syntax highlighting
 const template = html`
@@ -74,7 +74,7 @@ The project consists of:
 
 ## Supported Languages
 
-ts-template supports 40+ programming languages and file formats, including:
+ts-tag supports 40+ programming languages and file formats, including:
 
 ### Web Languages
 - HTML (`html`)
@@ -120,7 +120,7 @@ ts-template supports 40+ programming languages and file formats, including:
 You can use any file extension with the `ext` function:
 
 ```typescript
-import { ext } from "ts-template";
+import { ext } from "ts-tag";
 
 // Use a custom extension
 const svelte = ext("svelte");
@@ -141,21 +141,32 @@ const template = svelte`
 
 ## Development
 
+The project uses a Makefile to simplify development, testing, building, and publishing tasks.
+
 ```bash
+# Show available make targets
+make help
+
 # Run the development server
-deno task dev
+make dev
 
 # Run tests
-deno test
+make test
 
 # Generate test files for all supported languages
-deno task generate:tests
+make generate-tests
 
 # Generate syntax highlighting configurations for VSCode extension
-deno task generate:syntaxes
+make generate-syntaxes
 
 # Build the VSCode extension
-deno task build:extension
+make build-extension
+
+# Build the npm package using dnt
+make build-npm
+
+# Clean build artifacts
+make clean
 ```
 
 ## Publishing
@@ -167,10 +178,11 @@ This project uses GitHub Actions and semantic-release for automated publishing w
 When changes are pushed to the main branch, the GitHub Actions workflow will:
 
 1. Determine the next version based on commit messages
-2. Update the version in package.json, deno.json, and vscode-extension/package.json
+2. Update the version in deno.json and vscode-extension/package.json
 3. Generate a changelog
 4. Create a GitHub release
-5. Publish to npm, VSCode Marketplace, and JSR
+5. Build the npm package using dnt
+6. Publish to npm, VSCode Marketplace, and JSR
 
 ### Commit Message Format
 
@@ -198,60 +210,39 @@ You can also publish manually:
 #### VSCode Extension
 
 ```bash
-# Install vsce if you haven't already
-npm install -g @vscode/vsce
-
-# Navigate to the extension directory
-cd vscode-extension
-
-# Package the extension
-vsce package
-
-# Publish the extension
-vsce publish
+# Build and publish the VSCode extension
+make publish-extension
 ```
 
 #### npm Package
 
 ```bash
-# Install dependencies
-npm install
-
-# Build the package
-npm run build
-
-# Publish to npm
-npm publish
+# Build and publish the npm package
+make publish-npm
 ```
 
 #### Deno/JSR
 
 ```bash
-# Install Deno if you haven't already
-# https://docs.deno.com/runtime/manual/getting_started/installation
-
 # Publish to JSR
-deno publish
+make publish-jsr
 ```
 
 #### All Platforms
 
-Use the provided script to publish to all platforms at once:
+Use the Makefile to publish to all platforms at once:
 
 ```bash
-# Make the script executable
-chmod +x publish.sh
-
-# Run the script
-./publish.sh
+# Publish to all platforms (npm, VSCode Marketplace, and JSR)
+make publish
 ```
 
 ## Testing Templates
 
-ts-template includes utilities for testing templates:
+ts-tag includes utilities for testing templates:
 
 ```typescript
-import { html, testTemplate } from "ts-template";
+import { html, testTemplate } from "ts-tag";
 
 // Test a template
 const result = testTemplate(
@@ -265,7 +256,7 @@ const result = testTemplate(
 You can also generate test files for all supported languages:
 
 ```typescript
-import { generateLanguageTests } from "ts-template/test-utils";
+import { generateLanguageTests } from "ts-tag/test-utils";
 
 // Generate test files for all supported languages
 await generateLanguageTests("./test-output");

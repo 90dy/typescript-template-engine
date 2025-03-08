@@ -3,21 +3,34 @@
     "dev": "deno run --watch main.ts",
     "test": "deno test",
     "build:extension": "cd vscode-extension && vsce package",
+    "build:npm": "deno run -A build_npm.ts",
     "demo": "deno run main.ts",
     "generate:syntaxes": "cd vscode-extension && deno run --allow-read --allow-write generate-syntaxes.ts",
     "generate:tests": "deno run --allow-read --allow-write src/test-utils.ts"
   },
   "imports": {
-    "@std/assert": "jsr:@std/assert@1"
+    "@std/assert": "jsr:@std/assert@1",
+    "@deno/dnt": "jsr:@deno/dnt@^0.41.3"
   },
-  "name": "ts-template",
-  "version": "0.1.0",
-  "description": "TypeScript as a template engine through template literals",
+  "name": "@90dy/ts-tag",
+  "version": "0.2.0",
+  "description": "TypeScript template tag functions for syntax highlighting and code generation",
   "author": "90dy",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/90dy/ts-template"
+    "url": "https://github.com/90dy/ts-tag"
+  },
+  "publish": {
+    "include": [
+      "src/**/*.ts",
+      "README.md",
+      "LICENSE",
+      "deno.json"
+    ],
+    "exclude": [
+      "**/*.test.ts"
+    ]
   },
   "exports": {
     ".": "./src/mod.ts",

@@ -102,33 +102,68 @@ Object.entries(LANGUAGES).forEach(([key, lang]) => {
   }
 });
 
-// Export all template functions
-export const {
-  // Web languages
-  html, css, js, ts, jsx, tsx,
-  
-  // Data formats
-  json, xml, yaml, toml, ini, csv,
-  
-  // Markup languages
-  md, tex, rst,
-  
-  // Query languages
-  sql, graphql,
-  
-  // Shell scripting
-  sh, ps1, bat,
-  
-  // Programming languages
-  py, rb, go, rs, c, cpp, cs, java, php, swift, kt,
-  scala, dart, lua, pl, r, elm, fs, clj, hs,
-  
-  // Configuration files
-  dockerfile, makefile,
-  
-  // Other
-  svg, diff, proto, sol,
-} = templateFunctions;
+// Export all template functions individually (no destructuring for JSR compatibility)
+// Web languages
+export const html = templateFunctions.html;
+export const css = templateFunctions.css;
+export const js = templateFunctions.js;
+export const ts = templateFunctions.ts;
+export const jsx = templateFunctions.jsx;
+export const tsx = templateFunctions.tsx;
+
+// Data formats
+export const json = templateFunctions.json;
+export const xml = templateFunctions.xml;
+export const yaml = templateFunctions.yaml;
+export const toml = templateFunctions.toml;
+export const ini = templateFunctions.ini;
+export const csv = templateFunctions.csv;
+
+// Markup languages
+export const md = templateFunctions.md;
+export const tex = templateFunctions.tex;
+export const rst = templateFunctions.rst;
+
+// Query languages
+export const sql = templateFunctions.sql;
+export const graphql = templateFunctions.graphql;
+
+// Shell scripting
+export const sh = templateFunctions.sh;
+export const ps1 = templateFunctions.ps1;
+export const bat = templateFunctions.bat;
+
+// Programming languages
+export const py = templateFunctions.py;
+export const rb = templateFunctions.rb;
+export const go = templateFunctions.go;
+export const rs = templateFunctions.rs;
+export const c = templateFunctions.c;
+export const cpp = templateFunctions.cpp;
+export const cs = templateFunctions.cs;
+export const java = templateFunctions.java;
+export const php = templateFunctions.php;
+export const swift = templateFunctions.swift;
+export const kt = templateFunctions.kt;
+export const scala = templateFunctions.scala;
+export const dart = templateFunctions.dart;
+export const lua = templateFunctions.lua;
+export const pl = templateFunctions.pl;
+export const r = templateFunctions.r;
+export const elm = templateFunctions.elm;
+export const fs = templateFunctions.fs;
+export const clj = templateFunctions.clj;
+export const hs = templateFunctions.hs;
+
+// Configuration files
+export const dockerfile = templateFunctions.dockerfile;
+export const makefile = templateFunctions.makefile;
+
+// Other
+export const svg = templateFunctions.svg;
+export const diff = templateFunctions.diff;
+export const proto = templateFunctions.proto;
+export const sol = templateFunctions.sol;
 
 /**
  * Get all supported language extensions

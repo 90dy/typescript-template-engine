@@ -1,0 +1,35 @@
+# Deno
+.deno/
+deno.lock
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Build output
+npm/
+dist/
+*.tsbuildinfo
+
+# VSCode Extension
+*.vsix
+.vscode-test/
+vscode-extension/out/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS specific
+.DS_Store
+Thumbs.db
