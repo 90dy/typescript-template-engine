@@ -8,7 +8,7 @@
   ],
   "repository": {
     "sh-tagged-template": {
-      "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(lang\\.)?(sh)\\s*(`)",
+      "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(?:(lang\\.)?(sh)|ext\\([\"']sh[\"']\\))\\s*(`)",
       "beginCaptures": {
         "1": {
           "name": "entity.name.function.ts"

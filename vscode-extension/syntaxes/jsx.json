@@ -8,7 +8,7 @@
   ],
   "repository": {
     "jsx-tagged-template": {
-      "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(lang\\.)?(jsx)\\s*(`)",
+      "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(?:(lang\\.)?(jsx)|ext\\([\"']jsx[\"']\\))\\s*(`)",
       "beginCaptures": {
         "1": {
           "name": "entity.name.function.ts"

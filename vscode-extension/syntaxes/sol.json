@@ -8,7 +8,7 @@
   ],
   "repository": {
     "sol-tagged-template": {
-      "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(lang\\.)?(sol)\\s*(`)",
+      "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(?:(lang\\.)?(sol)|ext\\([\"']sol[\"']\\))\\s*(`)",
       "beginCaptures": {
         "1": {
           "name": "entity.name.function.ts"

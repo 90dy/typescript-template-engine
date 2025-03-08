@@ -1,4 +1,4 @@
-import { html, css, js, sql, json, ini, ext } from "./src/mod.ts";
+import { html, css, js, sql, json, ini, ext, tsx } from "./src/mod.ts";
 
 /**
  * Demonstrates the usage of the ts-template library
@@ -74,6 +74,22 @@ function demonstrateTemplates() {
     language = en
   `;
 
+  // TSX template
+  const tsxTemplate = tsx`
+    import React from "react";
+    
+    const App = () => {
+      return (
+        <div>
+          <h1>${title}</h1>
+          <p>${content}</p>
+        </div>
+      );
+    };
+    
+    export default App;
+  `;
+
   console.log("HTML Template:");
   console.log(htmlTemplate);
   console.log("\nSQL Template:");
@@ -84,6 +100,8 @@ function demonstrateTemplates() {
   console.log(yamlTemplate);
   console.log("\nINI Template:");
   console.log(iniTemplate);
+  console.log("\nTSX Template:");
+  console.log(tsxTemplate);
 }
 
 // Learn more at https://docs.deno.com/runtime/manual/examples/module_metadata#concepts

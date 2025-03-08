@@ -56,7 +56,7 @@
         "scopeName": "inline.js.template",
         "path": "./syntaxes/js.json",
         "embeddedLanguages": {
-          "meta.embedded.block.javascript": "javascript"
+          "meta.embedded.block.js": "js"
         }
       },
       {
@@ -66,10 +66,36 @@
           "source.js",
           "source.jsx"
         ],
-        "scopeName": "inline.sql.template",
-        "path": "./syntaxes/sql.json",
+        "scopeName": "inline.ts.template",
+        "path": "./syntaxes/ts.json",
         "embeddedLanguages": {
-          "meta.embedded.block.sql": "sql"
+          "meta.embedded.block.ts": "ts"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.jsx.template",
+        "path": "./syntaxes/jsx.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.jsx": "jsx"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.tsx.template",
+        "path": "./syntaxes/tsx.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.tsx": "tsx"
         }
       },
       {
@@ -92,10 +118,504 @@
           "source.js",
           "source.jsx"
         ],
+        "scopeName": "inline.xml.template",
+        "path": "./syntaxes/xml.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.xml": "xml"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.yaml.template",
+        "path": "./syntaxes/yaml.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.yaml": "yaml"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.toml.template",
+        "path": "./syntaxes/toml.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.toml": "toml"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.ini.template",
+        "path": "./syntaxes/ini.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.ini": "properties"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.csv.template",
+        "path": "./syntaxes/csv.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.csv": "csv"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
         "scopeName": "inline.md.template",
         "path": "./syntaxes/md.json",
         "embeddedLanguages": {
-          "meta.embedded.block.markdown": "markdown"
+          "meta.embedded.block.md": "md"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.tex.template",
+        "path": "./syntaxes/tex.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.tex": "tex"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.rst.template",
+        "path": "./syntaxes/rst.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.rst": "rst"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.sql.template",
+        "path": "./syntaxes/sql.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.sql": "sql"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.graphql.template",
+        "path": "./syntaxes/graphql.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.graphql": "graphql"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.sh.template",
+        "path": "./syntaxes/sh.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.sh": "sh"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.ps1.template",
+        "path": "./syntaxes/ps1.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.ps1": "ps1"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.bat.template",
+        "path": "./syntaxes/bat.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.bat": "bat"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.py.template",
+        "path": "./syntaxes/py.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.py": "py"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.rb.template",
+        "path": "./syntaxes/rb.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.rb": "rb"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.go.template",
+        "path": "./syntaxes/go.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.go": "go"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.rs.template",
+        "path": "./syntaxes/rs.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.rs": "rs"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.c.template",
+        "path": "./syntaxes/c.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.c": "c"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.cpp.template",
+        "path": "./syntaxes/cpp.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.cpp": "cpp"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.cs.template",
+        "path": "./syntaxes/cs.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.cs": "cs"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.java.template",
+        "path": "./syntaxes/java.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.java": "java"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.php.template",
+        "path": "./syntaxes/php.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.php": "php"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.swift.template",
+        "path": "./syntaxes/swift.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.swift": "swift"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.kt.template",
+        "path": "./syntaxes/kt.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.kt": "kt"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.scala.template",
+        "path": "./syntaxes/scala.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.scala": "scala"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.dart.template",
+        "path": "./syntaxes/dart.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.dart": "dart"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.lua.template",
+        "path": "./syntaxes/lua.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.lua": "lua"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.pl.template",
+        "path": "./syntaxes/pl.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.pl": "pl"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.r.template",
+        "path": "./syntaxes/r.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.r": "r"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.elm.template",
+        "path": "./syntaxes/elm.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.elm": "elm"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.fs.template",
+        "path": "./syntaxes/fs.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.fs": "fs"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.clj.template",
+        "path": "./syntaxes/clj.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.clj": "clj"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.hs.template",
+        "path": "./syntaxes/hs.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.hs": "hs"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.dockerfile.template",
+        "path": "./syntaxes/dockerfile.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.dockerfile": "dockerfile"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.makefile.template",
+        "path": "./syntaxes/makefile.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.makefile": "makefile"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.svg.template",
+        "path": "./syntaxes/svg.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.svg": "svg"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.diff.template",
+        "path": "./syntaxes/diff.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.diff": "diff"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.proto.template",
+        "path": "./syntaxes/proto.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.proto": "proto"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.sol.template",
+        "path": "./syntaxes/sol.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.sol": "sol"
         }
       }
     ]

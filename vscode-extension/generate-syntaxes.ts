@@ -19,18 +19,18 @@ await ensureDir(SYNTAXES_DIR);
 const LANGUAGE_IDENTIFIERS: Record<string, string> = {
   // Web languages
   html: "text.html.basic",
-  css: "source.css",
-  js: "source.js",
-  ts: "source.ts",
-  jsx: "source.jsx",
-  tsx: "source.tsx",
+  css: "css",
+  js: "js",
+  ts: "ts",
+  jsx: "jsx",
+  tsx: "tsx",
   
   // Data formats
   json: "source.json",
   xml: "text.xml",
   yaml: "source.yaml",
   toml: "source.toml",
-  ini: "source.properties",
+  ini: "ini",
   csv: "text.csv",
   
   // Markup languages
@@ -104,7 +104,7 @@ function generateSyntaxConfig(langKey: string, langDef: typeof LANGUAGES[keyof t
     ],
     repository: {
       [`${extension}-tagged-template`]: {
-        begin: "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(lang\\.)?(" + langKey + ")\\s*(`)",
+        begin: "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(?:(lang\\.)?(" + langKey + ")|ext\\([\"']" + extension + "[\"']\\))\\s*(`)",
         beginCaptures: {
           1: {
             name: "entity.name.function.ts"
@@ -145,6 +145,13 @@ function generateSyntaxConfig(langKey: string, langDef: typeof LANGUAGES[keyof t
 function generatePackageJsonGrammars() {
   return Object.entries(LANGUAGES).map(([langKey, langDef]) => {
     const extension = langDef.extension;
+    
+    // Map special language identifiers
+    let languageId = extension;
+    if (extension === "ini") {
+      languageId = "properties";
+    }
+    
     return {
       injectTo: [
         "source.ts",
@@ -155,7 +162,7 @@ function generatePackageJsonGrammars() {
       scopeName: `inline.${extension}.template`,
       path: `./syntaxes/${extension}.json`,
       embeddedLanguages: {
-        [`meta.embedded.block.${extension}`]: extension
+        [`meta.embedded.block.${extension}`]: languageId
       }
     };
   });
@@ -175,7 +182,15 @@ for (const [langKey, langDef] of Object.entries(LANGUAGES)) {
 
 // Generate package.json grammars section
 const grammars = generatePackageJsonGrammars();
-console.log("\nPackage.json grammars section:");
-console.log(JSON.stringify({ grammars }, null, 2));
+// Update package.json with the generated grammars
+try {
+  const packageJsonPath = "./package.json";
+  const packageJson = JSON.parse(await Deno.readTextFile(packageJsonPath));
+  packageJson.contributes.grammars = grammars;
+  await Deno.writeTextFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
+  console.log("\nUpdated package.json with generated grammars");
+} catch (error) {
+  console.error("\nError updating package.json:", error);
+}
 
 console.log("\nDone!");
