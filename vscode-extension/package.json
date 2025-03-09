@@ -2,7 +2,7 @@
   "name": "ts-tag-vscode",
   "displayName": "TypeScript Template Tag Functions",
   "description": "Syntax highlighting for template tag functions in TypeScript",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publisher": "90dy",
   "icon": "icon.png",
   "engines": {

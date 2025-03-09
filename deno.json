@@ -13,7 +13,7 @@
     "@deno/dnt": "jsr:@deno/dnt@^0.41.3"
   },
   "name": "@90dy/ts-tag",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "TypeScript template tag functions for syntax highlighting and code generation",
   "author": "90dy",
   "license": "MIT",

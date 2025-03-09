@@ -70,7 +70,7 @@ publish-extension: build-extension
 .PHONY: publish-jsr
 publish-jsr: check-tools
 	@echo "Checking JSR login status..."
-	@deno publish --dry-run >/dev/null 2>&1
+	@deno publish --dry-run
 	@echo "Publishing to JSR..."
 	deno publish
 
