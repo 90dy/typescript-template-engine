@@ -137,37 +137,49 @@ function generateSyntaxConfig(langKey: string, langDef: typeof LANGUAGES[keyof t
       }
     ];
   } else if (extension === "md") {
-    // Special handling for Markdown
-    // Markdown needs special treatment because it can contain code blocks with backticks
-    // which can conflict with the template literal syntax
-    languagePatterns = [
-      // First include the markdown language grammar
-      {
-        include: languageId
-      },
-      // Add special handling for code blocks to prevent conflicts with template literals
-      {
-        match: "(^|\\G)(\\s*)(```)(\\s*)(\\S*)",
-        captures: {
-          3: {
-            name: "punctuation.definition.markdown"
+    // For Markdown, we use a simplified pattern that matches the custom md.json
+    // This is to ensure compatibility with existing Markdown template usage
+    languagePatterns = [];
+    
+    // Return a custom syntax config for Markdown
+    return {
+      fileTypes: [],
+      injectionSelector: "L:source.ts, L:source.tsx, L:source.js, L:source.jsx",
+      patterns: [
+        {
+          include: "#md-tagged-template"
+        }
+      ],
+      repository: {
+        "md-tagged-template": {
+          begin: "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(?:(lang\\.)?(md)|ext\\([\"']md[\"']\\))\\s*(`)",
+          beginCaptures: {
+            1: {
+              name: "entity.name.function.ts"
+            },
+            2: {
+              name: "entity.name.function.ts"
+            },
+            3: {
+              name: "punctuation.definition.string.template.begin.ts"
+            }
           },
-          5: {
-            name: "fenced_code.block.language.markdown"
-          }
+          end: "`",
+          endCaptures: {
+            0: {
+              name: "punctuation.definition.string.template.end.ts"
+            }
+          },
+          contentName: "meta.embedded.block.markdown",
+          patterns: [
+            {
+              include: "source.ts#template-substitution-element"
+            }
+          ]
         }
       },
-      {
-        begin: "(^|\\G)(\\s*)(```)(\\s*)([^`\\s]*)",
-        end: "(^|\\G)(\\s*)(```)",
-        name: "markup.fenced_code.block.markdown",
-        patterns: [
-          {
-            include: "#markdown-code-block"
-          }
-        ]
-      }
-    ];
+      scopeName: "inline.md.template"
+    };
   } else {
     // Default pattern for other languages
     languagePatterns = [
