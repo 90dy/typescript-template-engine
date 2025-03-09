@@ -1,6 +1,6 @@
-# Contributing to ts-template
+# Contributing to ts-tmpl-engine
 
-Thank you for considering contributing to ts-template! This document provides guidelines and instructions for contributing to this project.
+Thank you for considering contributing to ts-tmpl-engine! This document provides guidelines and instructions for contributing to this project.
 
 ## Code of Conduct
 
@@ -38,8 +38,8 @@ This section guides you through submitting an enhancement suggestion, including 
 
 ```bash
 # Clone the repository
-git clone https://github.com/90dy/ts-template.git
-cd ts-template
+git clone https://github.com/90dy/ts-tmpl-engine.git
+cd ts-tmpl-engine
 
 # Install dependencies
 npm install
@@ -117,4 +117,4 @@ We use [Semantic Versioning](https://semver.org/) for versioning. The version nu
 
 ## License
 
-By contributing to ts-template, you agree that your contributions will be licensed under the project's MIT license.
+By contributing to ts-tmpl-engine, you agree that your contributions will be licensed under the project's MIT license.

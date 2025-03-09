@@ -1,7 +1,7 @@
 /**
- * Core module for ts-template
+ * Core module for ts-tmpl-engine
  * 
- * This module exports the core functionality of the ts-template library.
+ * This module exports the core functionality of the ts-tmpl-engine library.
  */
 
 // Export core template functionality

@@ -2,7 +2,7 @@
  * Script to generate syntax highlighting configurations for all supported languages
  * 
  * This script generates JSON configuration files for VSCode syntax highlighting
- * based on the supported languages in the ts-template library.
+ * based on the supported languages in the ts-tmpl-engine library.
  */
 
 import { LANGUAGES } from "../src/core/templates.ts";
@@ -19,11 +19,11 @@ await ensureDir(SYNTAXES_DIR);
 const LANGUAGE_IDENTIFIERS: Record<string, string> = {
   // Web languages
   html: "text.html.basic",
-  css: "css",
-  js: "js",
-  ts: "ts",
-  jsx: "jsx",
-  tsx: "tsx",
+  css: "source.css",
+  js: "source.js",
+  ts: "source.ts",
+  jsx: "source.jsx",
+  tsx: "source.tsx",
   
   // Data formats
   json: "source.json",
@@ -34,7 +34,7 @@ const LANGUAGE_IDENTIFIERS: Record<string, string> = {
   csv: "text.csv",
   
   // Markup languages
-  // md: "text.html.markdown",
+  md: "text.html.markdown",
   tex: "text.tex.latex",
   rst: "text.restructuredtext",
   

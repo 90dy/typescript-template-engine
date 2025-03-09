@@ -1,5 +1,5 @@
 /**
- * Core template functionality for ts-template
+ * Core template functionality for ts-tmpl-engine
  * 
  * This module provides the base template tag function and utilities
  * for handling different file types in template literals.

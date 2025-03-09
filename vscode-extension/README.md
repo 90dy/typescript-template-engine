@@ -14,7 +14,7 @@ This VSCode extension provides syntax highlighting for template literals in Type
 Simply use the appropriate tag function for your template literals:
 
 ```typescript
-import { html, css, js, sql, json, md } from "ts-template";
+import { html, css, js, sql, json, md } from "ts-tmpl-engine";
 
 // HTML with syntax highlighting
 const template = html`
@@ -70,9 +70,9 @@ const documentation = md`
 ## Installation
 
 1. Install the extension from the VSCode marketplace
-2. Install the ts-template library:
+2. Install the ts-tmpl-engine library:
    ```bash
-   npm install ts-template
+   npm install ts-tmpl-engine
    ```
 3. Import the template functions in your code
 4. Start using the template literals with syntax highlighting
@@ -125,7 +125,7 @@ This extension supports 40+ programming languages and file formats, including:
 You can use any file extension with the `ext` function:
 
 ```typescript
-import { ext } from "ts-template";
+import { ext } from "ts-tmpl-engine";
 
 // Use a custom extension
 const svelte = ext("svelte");
@@ -146,7 +146,7 @@ const template = svelte`
 
 ## How It Works
 
-This extension uses VSCode's grammar injection to provide syntax highlighting for template literals. It recognizes the tag functions from the ts-template library and applies the appropriate syntax highlighting based on the tag name.
+This extension uses VSCode's grammar injection to provide syntax highlighting for template literals. It recognizes the tag functions from the ts-tmpl-engine library and applies the appropriate syntax highlighting based on the tag name.
 
 ## Contributing
 

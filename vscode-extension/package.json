@@ -1,7 +1,7 @@
 {
-  "name": "ts-tag-vscode",
-  "displayName": "TypeScript Template Tag Functions",
-  "description": "Syntax highlighting for template tag functions in TypeScript",
+  "name": "ts-tmpl-engine-vscode",
+  "displayName": "TypeScript Template Engine",
+  "description": "Use TypeScript as a template engine with syntax highlighting for template tag functions",
   "version": "0.2.1",
   "publisher": "90dy",
   "icon": "icon.png",
@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/90dy/ts-tag"
+    "url": "https://github.com/90dy/ts-tmpl-engine"
   },
   "scripts": {
     "generate-syntaxes": "deno run --allow-read --allow-write generate-syntaxes.ts",

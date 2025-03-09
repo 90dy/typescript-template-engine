@@ -3,11 +3,11 @@
   "injectionSelector": "L:source.ts, L:source.tsx, L:source.js, L:source.jsx",
   "patterns": [
     {
-      "include": "#ts-tagged-template"
+      "include": "#ts-tmpl-engineged-template"
     }
   ],
   "repository": {
-    "ts-tagged-template": {
+    "ts-tmpl-engineged-template": {
       "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(?:(lang\\.)?(ts)|ext\\([\"']ts[\"']\\))\\s*(`)",
       "beginCaptures": {
         "1": {

@@ -1,4 +1,4 @@
-# Makefile for ts-template
+# Makefile for ts-tmpl-engine
 # This Makefile provides targets for development, testing, building, and publishing
 
 # Default target
@@ -89,7 +89,7 @@ demo: check-tools
 # Help
 .PHONY: help
 help:
-	@echo "ts-template Makefile"
+	@echo "ts-tmpl-engine Makefile"
 	@echo ""
 	@echo "Usage:"
 	@echo "  make [target]"

@@ -18,7 +18,7 @@ async function buildNpm() {
     },
     package: {
       // Use the same name as in npm (without the @90dy/ scope)
-      name: "ts-tag",
+      name: "ts-tmpl-engine",
       version,
       description: "TypeScript template tag functions for syntax highlighting and code generation",
       keywords: [
@@ -36,12 +36,12 @@ async function buildNpm() {
       license: "MIT",
       repository: {
         type: "git",
-        url: "https://github.com/90dy/ts-tag"
+        url: "https://github.com/90dy/ts-tmpl-engine"
       },
       bugs: {
-        url: "https://github.com/90dy/ts-tag/issues"
+        url: "https://github.com/90dy/ts-tmpl-engine/issues"
       },
-      homepage: "https://github.com/90dy/ts-tag#readme",
+      homepage: "https://github.com/90dy/ts-tmpl-engine#readme",
     },
     mappings: {
       // Add any external dependencies here if needed

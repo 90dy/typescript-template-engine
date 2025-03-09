@@ -1,4 +1,4 @@
-# TypeScript Template Tag Functions (ts-tag)
+# TypeScript Template Tag Functions (ts-tmpl-engine)
 
 A TypeScript library that provides template tag functions for syntax highlighting and code generation. This project enables using TypeScript template literals with proper syntax highlighting for various file formats in VSCode.
 
@@ -15,16 +15,16 @@ A TypeScript library that provides template tag functions for syntax highlightin
 
 ```bash
 # Using npm
-npm install ts-tag
+npm install ts-tmpl-engine
 
 # Using Deno/JSR
-import { html, css, js } from "jsr:@90dy/ts-tag";
+import { html, css, js } from "jsr:@90dy/ts-tmpl-engine";
 ```
 
 ## Usage
 
 ```typescript
-import { html, css, js, sql } from "ts-tag";
+import { html, css, js, sql } from "ts-tmpl-engine";
 
 // HTML with syntax highlighting
 const template = html`
@@ -74,7 +74,7 @@ The project consists of:
 
 ## Supported Languages
 
-ts-tag supports 40+ programming languages and file formats, including:
+ts-tmpl-engine supports 40+ programming languages and file formats, including:
 
 ### Web Languages
 - HTML (`html`)
@@ -120,7 +120,7 @@ ts-tag supports 40+ programming languages and file formats, including:
 You can use any file extension with the `ext` function:
 
 ```typescript
-import { ext } from "ts-tag";
+import { ext } from "ts-tmpl-engine";
 
 // Use a custom extension
 const svelte = ext("svelte");
@@ -239,10 +239,10 @@ make publish
 
 ## Testing Templates
 
-ts-tag includes utilities for testing templates:
+ts-tmpl-engine includes utilities for testing templates:
 
 ```typescript
-import { html, testTemplate } from "ts-tag";
+import { html, testTemplate } from "ts-tmpl-engine";
 
 // Test a template
 const result = testTemplate(
@@ -256,7 +256,7 @@ const result = testTemplate(
 You can also generate test files for all supported languages:
 
 ```typescript
-import { generateLanguageTests } from "ts-tag/test-utils";
+import { generateLanguageTests } from "ts-tmpl-engine/test-utils";
 
 // Generate test files for all supported languages
 await generateLanguageTests("./test-output");

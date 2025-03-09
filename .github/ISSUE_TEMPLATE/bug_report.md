@@ -21,7 +21,7 @@ A clear and concise description of what you expected to happen.
 ## Code Example
 ```typescript
 // Please provide a minimal code example that reproduces the issue
-import { html } from "ts-template";
+import { html } from "ts-tmpl-engine";
 
 const template = html`
   <div>
@@ -33,7 +33,7 @@ const template = html`
 ## Environment
 - OS: [e.g. Windows, macOS, Linux]
 - VSCode Version: [e.g. 1.60.0]
-- ts-template Version: [e.g. 0.1.0]
+- ts-tmpl-engine Version: [e.g. 0.1.0]
 - VSCode Extension Version: [e.g. 0.1.0]
 - TypeScript Version: [e.g. 4.5.0]
 - Node.js Version (if applicable): [e.g. 16.13.0]

@@ -1,5 +1,5 @@
 /**
- * Test utilities for ts-template
+ * Test utilities for ts-tmpl-engine
  * 
  * This module provides utilities for testing template functions
  * and verifying syntax highlighting.
@@ -224,9 +224,9 @@ npm install \${package}
 \`\`\``;
         values = {
           title: "Test Markdown Template",
-          product: "ts-template",
+          product: "ts-tmpl-engine",
           features: "- TypeScript as a template engine\n- Syntax highlighting for various file types\n- Easy to use and extend",
-          package: "ts-template",
+          package: "ts-tmpl-engine",
         };
         break;
         
