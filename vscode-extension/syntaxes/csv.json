@@ -7,6 +7,27 @@
     }
   ],
   "repository": {
+    "typescript-comment": {
+      "patterns": [
+        {
+          "match": "//.*$",
+          "name": "comment.line.double-slash.ts"
+        },
+        {
+          "begin": "/\\*",
+          "end": "\\*/",
+          "name": "comment.block.ts"
+        }
+      ]
+    },
+    "markdown-code-block": {
+      "patterns": [
+        {
+          "match": ".*",
+          "name": "markup.raw.code.markdown"
+        }
+      ]
+    },
     "csv-tagged-template": {
       "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(?:(lang\\.)?(csv)|ext\\([\"']csv[\"']\\))\\s*(`)",
       "beginCaptures": {
@@ -29,10 +50,13 @@
       "contentName": "meta.embedded.block.csv",
       "patterns": [
         {
+          "include": "#typescript-comment"
+        },
+        {
           "include": "source.ts#template-substitution-element"
         },
         {
-          "include": "text.csv"
+          "include": "source.csv"
         }
       ]
     }

@@ -7,6 +7,27 @@
     }
   ],
   "repository": {
+    "typescript-comment": {
+      "patterns": [
+        {
+          "match": "//.*$",
+          "name": "comment.line.double-slash.ts"
+        },
+        {
+          "begin": "/\\*",
+          "end": "\\*/",
+          "name": "comment.block.ts"
+        }
+      ]
+    },
+    "markdown-code-block": {
+      "patterns": [
+        {
+          "match": ".*",
+          "name": "markup.raw.code.markdown"
+        }
+      ]
+    },
     "md-tagged-template": {
       "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(?:(lang\\.)?(md)|ext\\([\"']md[\"']\\))\\s*(`)",
       "beginCaptures": {
@@ -29,10 +50,34 @@
       "contentName": "meta.embedded.block.md",
       "patterns": [
         {
+          "include": "#typescript-comment"
+        },
+        {
           "include": "source.ts#template-substitution-element"
         },
         {
           "include": "text.html.markdown"
+        },
+        {
+          "match": "(^|\\G)(\\s*)(```)(\\s*)(\\S*)",
+          "captures": {
+            "3": {
+              "name": "punctuation.definition.markdown"
+            },
+            "5": {
+              "name": "fenced_code.block.language.markdown"
+            }
+          }
+        },
+        {
+          "begin": "(^|\\G)(\\s*)(```)(\\s*)([^`\\s]*)",
+          "end": "(^|\\G)(\\s*)(```)",
+          "name": "markup.fenced_code.block.markdown",
+          "patterns": [
+            {
+              "include": "#markdown-code-block"
+            }
+          ]
         }
       ]
     }

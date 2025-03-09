@@ -7,6 +7,27 @@
     }
   ],
   "repository": {
+    "typescript-comment": {
+      "patterns": [
+        {
+          "match": "//.*$",
+          "name": "comment.line.double-slash.ts"
+        },
+        {
+          "begin": "/\\*",
+          "end": "\\*/",
+          "name": "comment.block.ts"
+        }
+      ]
+    },
+    "markdown-code-block": {
+      "patterns": [
+        {
+          "match": ".*",
+          "name": "markup.raw.code.markdown"
+        }
+      ]
+    },
     "proto-tagged-template": {
       "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(?:(lang\\.)?(proto)|ext\\([\"']proto[\"']\\))\\s*(`)",
       "beginCaptures": {
@@ -28,6 +49,9 @@
       },
       "contentName": "meta.embedded.block.proto",
       "patterns": [
+        {
+          "include": "#typescript-comment"
+        },
         {
           "include": "source.ts#template-substitution-element"
         },

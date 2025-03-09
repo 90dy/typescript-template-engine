@@ -7,6 +7,27 @@
     }
   ],
   "repository": {
+    "typescript-comment": {
+      "patterns": [
+        {
+          "match": "//.*$",
+          "name": "comment.line.double-slash.ts"
+        },
+        {
+          "begin": "/\\*",
+          "end": "\\*/",
+          "name": "comment.block.ts"
+        }
+      ]
+    },
+    "markdown-code-block": {
+      "patterns": [
+        {
+          "match": ".*",
+          "name": "markup.raw.code.markdown"
+        }
+      ]
+    },
     "php-tagged-template": {
       "begin": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(?:(lang\\.)?(php)|ext\\([\"']php[\"']\\))\\s*(`)",
       "beginCaptures": {
@@ -29,7 +50,30 @@
       "contentName": "meta.embedded.block.php",
       "patterns": [
         {
+          "include": "#typescript-comment"
+        },
+        {
           "include": "source.ts#template-substitution-element"
+        },
+        {
+          "begin": "<\\?(?:php|=)?",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.begin.php"
+            }
+          },
+          "end": "\\?>",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.end.php"
+            }
+          },
+          "name": "source.php",
+          "patterns": [
+            {
+              "include": "source.php"
+            }
+          ]
         },
         {
           "include": "source.php"

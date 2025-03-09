@@ -31,7 +31,7 @@ const LANGUAGE_IDENTIFIERS: Record<string, string> = {
   yaml: "source.yaml",
   toml: "source.toml",
   ini: "ini",
-  csv: "text.csv",
+  csv: "source.csv",
   
   // Markup languages
   md: "text.html.markdown",
@@ -94,6 +94,89 @@ function generateSyntaxConfig(langKey: string, langDef: typeof LANGUAGES[keyof t
   const extension = langDef.extension;
   const languageId = LANGUAGE_IDENTIFIERS[extension] || DEFAULT_LANGUAGE_IDENTIFIER;
   
+  // Define common patterns
+  const commonPatterns = [
+    // First include TypeScript comments
+    {
+      include: "#typescript-comment"
+    },
+    // Then include template substitution elements
+    {
+      include: "source.ts#template-substitution-element"
+    }
+  ];
+  
+  // Add language-specific patterns
+  let languagePatterns = [];
+  
+  // Special handling for specific languages
+  if (extension === "php") {
+    languagePatterns = [
+      {
+        begin: "<\\?(?:php|=)?",
+        beginCaptures: {
+          0: {
+            name: "punctuation.section.embedded.begin.php"
+          }
+        },
+        end: "\\?>",
+        endCaptures: {
+          0: {
+            name: "punctuation.section.embedded.end.php"
+          }
+        },
+        name: "source.php",
+        patterns: [
+          {
+            include: "source.php"
+          }
+        ]
+      },
+      {
+        include: languageId
+      }
+    ];
+  } else if (extension === "md") {
+    // Special handling for Markdown
+    // Markdown needs special treatment because it can contain code blocks with backticks
+    // which can conflict with the template literal syntax
+    languagePatterns = [
+      // First include the markdown language grammar
+      {
+        include: languageId
+      },
+      // Add special handling for code blocks to prevent conflicts with template literals
+      {
+        match: "(^|\\G)(\\s*)(```)(\\s*)(\\S*)",
+        captures: {
+          3: {
+            name: "punctuation.definition.markdown"
+          },
+          5: {
+            name: "fenced_code.block.language.markdown"
+          }
+        }
+      },
+      {
+        begin: "(^|\\G)(\\s*)(```)(\\s*)([^`\\s]*)",
+        end: "(^|\\G)(\\s*)(```)",
+        name: "markup.fenced_code.block.markdown",
+        patterns: [
+          {
+            include: "#markdown-code-block"
+          }
+        ]
+      }
+    ];
+  } else {
+    // Default pattern for other languages
+    languagePatterns = [
+      {
+        include: languageId
+      }
+    ];
+  }
+  
   return {
     fileTypes: [],
     injectionSelector: "L:source.ts, L:source.tsx, L:source.js, L:source.jsx",
@@ -103,6 +186,31 @@ function generateSyntaxConfig(langKey: string, langDef: typeof LANGUAGES[keyof t
       }
     ],
     repository: {
+      // Add a separate pattern for TypeScript comments that applies to the entire file
+      "typescript-comment": {
+        patterns: [
+          {
+            match: "//.*$",
+            name: "comment.line.double-slash.ts"
+          },
+          {
+            begin: "/\\*",
+            end: "\\*/",
+            name: "comment.block.ts"
+          }
+        ]
+      },
+      // Add a pattern for markdown code blocks
+      "markdown-code-block": {
+        patterns: [
+          {
+            // This pattern will match the content inside code blocks
+            // and prevent it from being parsed as template literals
+            match: ".*",
+            name: "markup.raw.code.markdown"
+          }
+        ]
+      },
       [`${extension}-tagged-template`]: {
         begin: "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(?:(lang\\.)?(" + langKey + ")|ext\\([\"']" + extension + "[\"']\\))\\s*(`)",
         beginCaptures: {
@@ -123,14 +231,7 @@ function generateSyntaxConfig(langKey: string, langDef: typeof LANGUAGES[keyof t
           }
         },
         contentName: `meta.embedded.block.${extension}`,
-        patterns: [
-          {
-            include: "source.ts#template-substitution-element"
-          },
-          {
-            include: languageId
-          }
-        ]
+        patterns: [...commonPatterns, ...languagePatterns]
       }
     },
     scopeName: `inline.${extension}.template`

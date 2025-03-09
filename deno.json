@@ -13,7 +13,7 @@
     "@deno/dnt": "jsr:@deno/dnt@^0.41.3"
   },
   "name": "@90dy/ts-tmpl-engine",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Use TypeScript as a template engine with syntax highlighting for template tag functions and code generation",
   "author": "90dy",
   "license": "MIT",

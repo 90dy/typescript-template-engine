@@ -1,4 +1,4 @@
-# TypeScript Template Tag Functions (ts-tmpl-engine)
+# TypeScript Template Engine (ts-tmpl-engine)
 
 A TypeScript library that provides template tag functions for syntax highlighting and code generation. This project enables using TypeScript template literals with proper syntax highlighting for various file formats in VSCode.
 
