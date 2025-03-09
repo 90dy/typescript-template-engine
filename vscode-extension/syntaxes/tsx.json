@@ -32,7 +32,7 @@
           "include": "source.ts#template-substitution-element"
         },
         {
-          "include": "tsx"
+          "include": "source.tsx"
         }
       ]
     }
