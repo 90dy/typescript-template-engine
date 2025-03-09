@@ -2,7 +2,7 @@
   "name": "ts-tmpl-engine-vscode",
   "displayName": "TypeScript Template Engine",
   "description": "Use TypeScript as a template engine with syntax highlighting for template tag functions",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "publisher": "90dy",
   "icon": "icon.png",
   "engines": {
