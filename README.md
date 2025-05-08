@@ -1,6 +1,6 @@
-# TypeScript Template Engine (ts-tmpl-engine)
+# TypeScript Template Engine
 
-A TypeScript library that provides template tag functions for syntax highlighting and code generation. This project enables using TypeScript template literals with proper syntax highlighting for various file formats in VSCode.
+A monorepo for TypeScript template engine tools and libraries. This project enables using TypeScript template literals with proper syntax highlighting for various file formats in VSCode, along with code generation capabilities.
 
 ## Features
 
@@ -11,20 +11,40 @@ A TypeScript library that provides template tag functions for syntax highlightin
 - Easy to extend with new file type support
 - Test utilities for verifying templates
 
-## Installation
+## Packages
+
+This monorepo contains the following packages:
+
+### @tmpl/core
+
+Core template literals functionality with syntax highlighting.
 
 ```bash
 # Using npm
-npm install ts-tmpl-engine
+npm install @tmpl/core
 
 # Using Deno/JSR
-import { html, css, js } from "jsr:@90dy/ts-tmpl-engine";
+import { html, css, js } from "jsr:@tmpl/core";
 ```
 
-## Usage
+### @tmpl/gen
+
+Code generation CLI for template literals.
+
+```bash
+# Using npm
+npm install -g @tmpl/gen
+
+# Using Deno/JSR
+deno install -A jsr:@tmpl/gen
+```
+
+## Usage Examples
+
+### Template Literals (@tmpl/core)
 
 ```typescript
-import { html, css, js, sql } from "ts-tmpl-engine";
+import { html, css, js, sql } from "@tmpl/core";
 
 // HTML with syntax highlighting
 const template = html`
@@ -139,6 +159,43 @@ const template = svelte`
 `;
 ```
 
+### Code Generation (@tmpl/gen)
+
+Create template files with language extensions:
+
+```typescript
+// header.html.ts
+import { html } from "@tmpl/core";
+
+const title = "My Website";
+const navItems = ["Home", "About", "Contact"];
+
+export default html`
+<!DOCTYPE html>
+<html>
+<head>
+  <title>${title}</title>
+</head>
+<body>
+  <header>
+    <h1>${title}</h1>
+    <nav>
+      <ul>
+        ${navItems.map(item => `<li><a href="#${item.toLowerCase()}">${item}</a></li>`).join('\n        ')}
+      </ul>
+    </nav>
+  </header>
+</body>
+</html>
+`;
+```
+
+Then generate the files:
+
+```bash
+deno run -A jsr:@tmpl/gen
+```
+
 ## Development
 
 The project uses a Makefile to simplify development, testing, building, and publishing tasks.
@@ -159,11 +216,13 @@ make generate-tests
 # Generate syntax highlighting configurations for VSCode extension
 make generate-syntaxes
 
-# Build the VSCode extension
-make build-extension
+# Build all packages
+make build
 
-# Build the npm package using dnt
-make build-npm
+# Build specific packages
+make build-core
+make build-gen
+make build-extension
 
 # Clean build artifacts
 make clean
@@ -178,10 +237,10 @@ This project uses GitHub Actions and semantic-release for automated publishing w
 When changes are pushed to the main branch, the GitHub Actions workflow will:
 
 1. Determine the next version based on commit messages
-2. Update the version in deno.json and vscode-extension/package.json
+2. Update the version in package configurations
 3. Generate a changelog
 4. Create a GitHub release
-5. Build the npm package using dnt
+5. Build the packages using dnt
 6. Publish to npm, VSCode Marketplace, and JSR
 
 ### Commit Message Format
@@ -205,35 +264,25 @@ feat!: change API to use new authentication system
 
 ### Manual Publishing
 
-You can also publish manually:
-
-#### VSCode Extension
+You can also publish packages manually:
 
 ```bash
-# Build and publish the VSCode extension
+# Publish core package to npm
+make publish-core
+
+# Publish gen package to npm
+make publish-gen
+
+# Publish VSCode extension
 make publish-extension
-```
 
-#### npm Package
+# Publish core package to JSR
+make publish-core-jsr
 
-```bash
-# Build and publish the npm package
-make publish-npm
-```
+# Publish gen package to JSR
+make publish-gen-jsr
 
-#### Deno/JSR
-
-```bash
-# Publish to JSR
-make publish-jsr
-```
-
-#### All Platforms
-
-Use the Makefile to publish to all platforms at once:
-
-```bash
-# Publish to all platforms (npm, VSCode Marketplace, and JSR)
+# Publish all packages to all platforms
 make publish
 ```
 

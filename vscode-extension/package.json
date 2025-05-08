@@ -2,8 +2,8 @@
   "name": "ts-tmpl-engine-vscode",
   "displayName": "TypeScript Template Engine",
   "description": "Use TypeScript as a template engine with syntax highlighting for template tag functions",
-  "version": "0.3.2",
   "publisher": "90dy",
+  "version": "0.4.0",
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.60.0"
@@ -565,6 +565,19 @@
         "path": "./syntaxes/makefile.json",
         "embeddedLanguages": {
           "meta.embedded.block.makefile": "makefile"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.mk.template",
+        "path": "./syntaxes/mk.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.mk": "mk"
         }
       },
       {

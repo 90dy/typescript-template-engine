@@ -1,4 +1,9 @@
 {
+  "workspace": [
+    "src/core",
+    "src/gen",
+    "vscode-extension"
+  ],
   "tasks": {
     "dev": "deno run --watch main.ts",
     "test": "deno test",
@@ -6,34 +11,20 @@
     "build:npm": "deno run -A build_npm.ts",
     "demo": "deno run main.ts",
     "generate:syntaxes": "cd vscode-extension && deno run --allow-read --allow-write generate-syntaxes.ts",
-    "generate:tests": "deno run --allow-read --allow-write src/test-utils.ts"
+    "gen": "deno run -A src/gen/main.ts"
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1",
-    "@deno/dnt": "jsr:@deno/dnt@^0.41.3"
+    "@deno/dnt": "jsr:@deno/dnt@^0.41.3",
+    "@std/path": "jsr:@std/path@^1.0.9",
+    "@std/yaml": "jsr:@std/yaml@^1.0.6"
   },
-  "name": "@90dy/ts-tmpl-engine",
-  "version": "0.3.2",
-  "description": "Use TypeScript as a template engine with syntax highlighting for template tag functions and code generation",
+  "version": "0.4.0",
+  "description": "TypeScript template engine monorepo",
   "author": "90dy",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/90dy/ts-tmpl-engine"
-  },
-  "publish": {
-    "include": [
-      "src/**/*.ts",
-      "README.md",
-      "LICENSE",
-      "deno.json"
-    ],
-    "exclude": [
-      "**/*.test.ts"
-    ]
-  },
-  "exports": {
-    ".": "./src/mod.ts",
-    "./core": "./src/core/mod.ts"
+    "url": "https://github.com/90dy/typescript-template-engine"
   }
 }

@@ -35,25 +35,6 @@ export {
   
   // Language utilities
   ext,
-  getSupportedExtensions,
-  getLanguageByExtension,
   type LanguageDefinition,
   LANGUAGES,
-} from "./core/templates.ts";
-
-// Export core template functionality
-export {
-  template,
-  createTemplate,
-  registerTemplate,
-  getTemplate,
-  type TemplateFn,
-} from "./core/template.ts";
-
-// Export test utilities
-export {
-  testTemplate,
-  testLanguageTemplate,
-  generateLanguageTests,
-  type TestTemplateOptions,
-} from "./test-utils.ts";
+} from "./core/mod.ts";
