@@ -1,0 +1,24 @@
+{
+  "name": "@tmpl/gen",
+  "description": "Code generation CLI for template literals",
+  "author": "90dy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/90dy/typescript-template-engine"
+  },
+  "publish": {
+    "include": [
+      "**/*.ts",
+      "README.md",
+      "deno.json"
+    ],
+    "exclude": [
+      "**/*.test.ts"
+    ]
+  },
+  "exports": {
+    ".": "./main.ts"
+  },
+  "version": "0.4.2"
+}

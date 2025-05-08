@@ -1,6 +1,6 @@
-# TypeScript Template Engine (ts-tmpl-engine)
+# TypeScript Template Engine
 
-A TypeScript library that provides template tag functions for syntax highlighting and code generation. This project enables using TypeScript template literals with proper syntax highlighting for various file formats in VSCode.
+A monorepo for TypeScript template engine tools and libraries. This project enables using TypeScript template literals with proper syntax highlighting for various file formats in VSCode, along with code generation capabilities.
 
 ## Features
 
@@ -11,20 +11,40 @@ A TypeScript library that provides template tag functions for syntax highlightin
 - Easy to extend with new file type support
 - Test utilities for verifying templates
 
-## Installation
+## Packages
+
+This monorepo contains the following packages:
+
+### @tmpl/core
+
+Core template literals functionality with syntax highlighting.
 
 ```bash
 # Using npm
-npm install ts-tmpl-engine
+npm install @tmpl/core
 
 # Using Deno/JSR
-import { html, css, js } from "jsr:@90dy/ts-tmpl-engine";
+import { html, css, js } from "jsr:@tmpl/core";
 ```
 
-## Usage
+### @tmpl/gen
+
+Code generation CLI for template literals.
+
+```bash
+# Using npm
+npm install -g @tmpl/gen
+
+# Using Deno/JSR
+deno install -A jsr:@tmpl/gen
+```
+
+## Usage Examples
+
+### Template Literals (@tmpl/core)
 
 ```typescript
-import { html, css, js, sql } from "ts-tmpl-engine";
+import { html, css, js, sql } from "@tmpl/core";
 
 // HTML with syntax highlighting
 const template = html`
@@ -74,7 +94,7 @@ The project consists of:
 
 ## Supported Languages
 
-ts-tmpl-engine supports 40+ programming languages and file formats, including:
+TypeScript Template Engine supports 40+ programming languages and file formats, including:
 
 ### Web Languages
 - HTML (`html`)
@@ -120,7 +140,7 @@ ts-tmpl-engine supports 40+ programming languages and file formats, including:
 You can use any file extension with the `ext` function:
 
 ```typescript
-import { ext } from "ts-tmpl-engine";
+import { ext } from "@tmpl/core";
 
 // Use a custom extension
 const svelte = ext("svelte");
@@ -139,6 +159,43 @@ const template = svelte`
 `;
 ```
 
+### Code Generation (@tmpl/gen)
+
+Create template files with language extensions:
+
+```typescript
+// header.html.ts
+import { html } from "@tmpl/core";
+
+const title = "My Website";
+const navItems = ["Home", "About", "Contact"];
+
+export default html`
+<!DOCTYPE html>
+<html>
+<head>
+  <title>${title}</title>
+</head>
+<body>
+  <header>
+    <h1>${title}</h1>
+    <nav>
+      <ul>
+        ${navItems.map(item => `<li><a href="#${item.toLowerCase()}">${item}</a></li>`).join('\n        ')}
+      </ul>
+    </nav>
+  </header>
+</body>
+</html>
+`;
+```
+
+Then generate the files:
+
+```bash
+deno run -A jsr:@tmpl/gen
+```
+
 ## Development
 
 The project uses a Makefile to simplify development, testing, building, and publishing tasks.
@@ -147,26 +204,26 @@ The project uses a Makefile to simplify development, testing, building, and publ
 # Show available make targets
 make help
 
-# Run the development server
-make dev
-
 # Run tests
 make test
-
-# Generate test files for all supported languages
-make generate-tests
 
 # Generate syntax highlighting configurations for VSCode extension
 make generate-syntaxes
 
+# Sync version from deno.json to all workspace files
+make sync-version
+
+# Build all packages
+make build
+
 # Build the VSCode extension
 make build-extension
 
-# Build the npm package using dnt
-make build-npm
-
 # Clean build artifacts
 make clean
+
+# Run the demo
+make demo
 ```
 
 ## Publishing
@@ -178,10 +235,10 @@ This project uses GitHub Actions and semantic-release for automated publishing w
 When changes are pushed to the main branch, the GitHub Actions workflow will:
 
 1. Determine the next version based on commit messages
-2. Update the version in deno.json and vscode-extension/package.json
+2. Update the version in package configurations
 3. Generate a changelog
 4. Create a GitHub release
-5. Build the npm package using dnt
+5. Build the packages using dnt
 6. Publish to npm, VSCode Marketplace, and JSR
 
 ### Commit Message Format
@@ -205,63 +262,59 @@ feat!: change API to use new authentication system
 
 ### Manual Publishing
 
-You can also publish manually:
-
-#### VSCode Extension
-
-```bash
-# Build and publish the VSCode extension
-make publish-extension
-```
-
-#### npm Package
-
-```bash
-# Build and publish the npm package
-make publish-npm
-```
-
-#### Deno/JSR
+You can also publish packages manually:
 
 ```bash
 # Publish to JSR
 make publish-jsr
-```
 
-#### All Platforms
+# Publish VSCode extension
+make publish-extension
 
-Use the Makefile to publish to all platforms at once:
-
-```bash
-# Publish to all platforms (npm, VSCode Marketplace, and JSR)
+# Publish all packages to all platforms
 make publish
 ```
 
-## Testing Templates
+### Version Synchronization
 
-ts-tmpl-engine includes utilities for testing templates:
+The project uses a version synchronization system to ensure that all packages in the monorepo have the same version. The version is defined in the root `deno.json` file and is automatically synchronized to all workspace packages when building or publishing.
 
-```typescript
-import { html, testTemplate } from "ts-tmpl-engine";
+To manually synchronize versions:
 
-// Test a template
-const result = testTemplate(
-  html,
-  ["<div>", "</div>"],
-  ["Hello, World!"],
-  { log: true, save: true, savePath: "output.html" }
-);
+```bash
+make sync-version
 ```
 
-You can also generate test files for all supported languages:
+This will update the version in:
+- src/core/deno.json
+- src/gen/deno.json
+- vscode-extension/package.json
+
+## Testing Templates
+
+@tmpl/core includes utilities for testing templates:
 
 ```typescript
-import { generateLanguageTests } from "ts-tmpl-engine/test-utils";
+import { html } from "@tmpl/core";
 
-// Generate test files for all supported languages
-await generateLanguageTests("./test-output");
+// Test a template
+const template = html`<div>${"Hello, World!"}</div>`;
+console.log(template.toString());
+```
+
+You can also use the template in combination with testing frameworks like Deno Test:
+
+```typescript
+import { assertEquals } from "@std/assert";
+import { html } from "@tmpl/core";
+
+Deno.test("HTML template test", () => {
+  const name = "World";
+  const template = html`<div>Hello, ${name}!</div>`;
+  assertEquals(template.toString(), "<div>Hello, World!</div>");
+});
 ```
 
 ## License
 
-MIT
+BSD 3-Clause License

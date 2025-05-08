@@ -1,0 +1,24 @@
+{
+  "name": "@tmpl/core",
+  "description": "Core template literals functionality with syntax highlighting",
+  "author": "90dy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/90dy/typescript-template-engine"
+  },
+  "publish": {
+    "include": [
+      "**/*.ts",
+      "README.md",
+      "deno.json"
+    ],
+    "exclude": [
+      "**/*.test.ts"
+    ]
+  },
+  "exports": {
+    ".": "./mod.ts"
+  },
+  "version": "0.4.2"
+}
