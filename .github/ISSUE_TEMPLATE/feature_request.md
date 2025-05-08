@@ -18,7 +18,7 @@ A clear and concise description of any alternative solutions or features you've 
 ## Example usage
 ```typescript
 // If applicable, provide an example of how you would like to use this feature
-import { newFeature } from "ts-tmpl-engine";
+import { newFeature } from "@tmpl/core";
 
 const example = newFeature`
   // Example usage here

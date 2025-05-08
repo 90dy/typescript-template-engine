@@ -19,8 +19,11 @@ The `@tmpl/gen` CLI tool can be used to generate files from templates. It looks 
 ### Basic Usage
 
 ```bash
-# Run the generator
+# Run the generator in the current directory
 deno run -A jsr:@tmpl/gen
+
+# Specify source and destination directories
+deno run -A jsr:@tmpl/gen ./dist ./src/templates
 ```
 
 ### Template Files
@@ -30,6 +33,8 @@ Template files should be TypeScript files that export a default function or stri
 - `header.html.ts` - Generates `header.html`
 - `styles.css.ts` - Generates `styles.css`
 - `query.sql.ts` - Generates `query.sql`
+
+The generator will automatically find all template files that match the pattern `*.{extension}.ts` where `{extension}` is any of the supported language extensions from `@tmpl/core`.
 
 ### Example Template File
 
@@ -102,4 +107,4 @@ await generateTemplates("./templates", {
 
 ## License
 
-MIT
+BSD 3-Clause License

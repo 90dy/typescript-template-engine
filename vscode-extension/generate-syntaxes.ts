@@ -2,7 +2,7 @@
  * Script to generate syntax highlighting configurations for all supported languages
  * 
  * This script generates JSON configuration files for VSCode syntax highlighting
- * based on the supported languages in the ts-tmpl-engine library.
+ * based on the supported languages in the @tmpl/core library.
  */
 
 import { LANGUAGES } from "../src/core/mod.ts";

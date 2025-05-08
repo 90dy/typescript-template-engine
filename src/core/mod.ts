@@ -1,7 +1,7 @@
 /**
- * Core module for ts-tmpl-engine
+ * Core module for @tmpl/core
  *
- * This module exports the core functionality of the ts-tmpl-engine library.
+ * This module exports the core functionality of the @tmpl/core library.
  */
 
 import * as YAML from "@std/yaml";

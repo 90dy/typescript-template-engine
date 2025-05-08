@@ -94,7 +94,7 @@ The project consists of:
 
 ## Supported Languages
 
-ts-tmpl-engine supports 40+ programming languages and file formats, including:
+TypeScript Template Engine supports 40+ programming languages and file formats, including:
 
 ### Web Languages
 - HTML (`html`)
@@ -140,7 +140,7 @@ ts-tmpl-engine supports 40+ programming languages and file formats, including:
 You can use any file extension with the `ext` function:
 
 ```typescript
-import { ext } from "ts-tmpl-engine";
+import { ext } from "@tmpl/core";
 
 // Use a custom extension
 const svelte = ext("svelte");
@@ -204,28 +204,26 @@ The project uses a Makefile to simplify development, testing, building, and publ
 # Show available make targets
 make help
 
-# Run the development server
-make dev
-
 # Run tests
 make test
-
-# Generate test files for all supported languages
-make generate-tests
 
 # Generate syntax highlighting configurations for VSCode extension
 make generate-syntaxes
 
+# Sync version from deno.json to all workspace files
+make sync-version
+
 # Build all packages
 make build
 
-# Build specific packages
-make build-core
-make build-gen
+# Build the VSCode extension
 make build-extension
 
 # Clean build artifacts
 make clean
+
+# Run the demo
+make demo
 ```
 
 ## Publishing
@@ -267,50 +265,56 @@ feat!: change API to use new authentication system
 You can also publish packages manually:
 
 ```bash
-# Publish core package to npm
-make publish-core
-
-# Publish gen package to npm
-make publish-gen
+# Publish to JSR
+make publish-jsr
 
 # Publish VSCode extension
 make publish-extension
-
-# Publish core package to JSR
-make publish-core-jsr
-
-# Publish gen package to JSR
-make publish-gen-jsr
 
 # Publish all packages to all platforms
 make publish
 ```
 
-## Testing Templates
+### Version Synchronization
 
-ts-tmpl-engine includes utilities for testing templates:
+The project uses a version synchronization system to ensure that all packages in the monorepo have the same version. The version is defined in the root `deno.json` file and is automatically synchronized to all workspace packages when building or publishing.
 
-```typescript
-import { html, testTemplate } from "ts-tmpl-engine";
+To manually synchronize versions:
 
-// Test a template
-const result = testTemplate(
-  html,
-  ["<div>", "</div>"],
-  ["Hello, World!"],
-  { log: true, save: true, savePath: "output.html" }
-);
+```bash
+make sync-version
 ```
 
-You can also generate test files for all supported languages:
+This will update the version in:
+- src/core/deno.json
+- src/gen/deno.json
+- vscode-extension/package.json
+
+## Testing Templates
+
+@tmpl/core includes utilities for testing templates:
 
 ```typescript
-import { generateLanguageTests } from "ts-tmpl-engine/test-utils";
+import { html } from "@tmpl/core";
 
-// Generate test files for all supported languages
-await generateLanguageTests("./test-output");
+// Test a template
+const template = html`<div>${"Hello, World!"}</div>`;
+console.log(template.toString());
+```
+
+You can also use the template in combination with testing frameworks like Deno Test:
+
+```typescript
+import { assertEquals } from "@std/assert";
+import { html } from "@tmpl/core";
+
+Deno.test("HTML template test", () => {
+  const name = "World";
+  const template = html`<div>Hello, ${name}!</div>`;
+  assertEquals(template.toString(), "<div>Hello, World!</div>");
+});
 ```
 
 ## License
 
-MIT
+BSD 3-Clause License

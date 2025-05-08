@@ -128,14 +128,40 @@ const jsContent = js`console.log("Hello, ${name}!");`;
 
 ### Core Functions
 
-- `createTemplate(extension: string): TemplateFn` - Creates a template tag function for a specific file extension
-- `registerTemplate(extension: string, templateFn: TemplateFn): void` - Registers a template function for a specific file extension
-- `getTemplate(extension: string): TemplateFn` - Gets a template function for a specific file extension
-- `template(strings: TemplateStringsArray, ...values: unknown[]): string` - Base template function that processes template literals
-- `ext(extension: string): TemplateFn` - Generic template function for any file extension
-- `getSupportedExtensions(): string[]` - Get all supported language extensions
-- `getLanguageByExtension(extension: string): LanguageDefinition | undefined` - Get language definition by extension
+- `ext<Type extends string>(type: Type, parser?: (text: string) => unknown, options?: { indent: false | number }): Ext<Type>` - Generic template function for any file extension
+- `LANGUAGES: Record<string, LanguageDefinition>` - Comprehensive list of supported languages
+
+### TemplateDocument Methods
+
+Template tag functions return a `TemplateDocument` instance, which extends `String` and provides additional methods:
+
+```typescript
+// Create a template
+const template = html`<div>${content}</div>`;
+
+// Adjust indentation
+const indented = template.indent(2);  // Indent by 2 spaces
+const noIndent = template.noindent();  // Remove all indentation
+
+// Parse the template content
+const jsonTemplate = json`{ "name": "${name}" }`;
+const data = jsonTemplate.data;  // Automatically parsed JSON data
+
+// Throw on parse errors
+const strictJson = json`{ "name": "${name}" }`.throw();
+```
+
+### Language Definition Interface
+
+```typescript
+interface LanguageDefinition {
+  extension: string;
+  aliases?: string[];
+  mimeType?: string;
+  description?: string;
+}
+```
 
 ## License
 
-MIT
+BSD 3-Clause License

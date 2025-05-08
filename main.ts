@@ -1,3 +1,4 @@
+import { LANGUAGES } from "./src/core/mod.ts";
 import {
   // Web languages
   html, css, js, ts, jsx, tsx,
@@ -25,11 +26,11 @@ import {
   svg, diff, proto, sol,
   
   // Language utilities
-  ext, getSupportedExtensions
+  ext, 
 } from "./src/mod.ts";
 
 /**
- * Demonstrates the usage of the ts-tmpl-engine library
+ * Demonstrates the usage of the @tmpl/core library
  */
 function demonstrateTemplates() {
   const title = "TypeScript Template Engine";
@@ -40,11 +41,11 @@ function demonstrateTemplates() {
   const version = "1.0.0";
   const username = "johndoe";
   const password = "password123";
-  const repoUrl = "https://github.com/90dy/ts-tmpl-engine";
+  const repoUrl = "https://github.com/90dy/typescript-template-engine";
   const apiEndpoint = "https://api.example.com";
   const port = 3000;
 
-  console.log("Supported extensions:", getSupportedExtensions().join(", "));
+  console.log("Supported extensions:", Object.keys(LANGUAGES).join(", "));
   
   // ==================== WEB LANGUAGES ====================
   

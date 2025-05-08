@@ -3,7 +3,7 @@
   "displayName": "TypeScript Template Engine",
   "description": "Use TypeScript as a template engine with syntax highlighting for template tag functions",
   "publisher": "90dy",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.60.0"
@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/90dy/ts-tmpl-engine"
+    "url": "https://github.com/90dy/typescript-template-engine"
   },
   "scripts": {
     "generate-syntaxes": "deno run --allow-read --allow-write generate-syntaxes.ts",

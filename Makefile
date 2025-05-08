@@ -1,4 +1,4 @@
-# Makefile for ts-tmpl-engine
+# Makefile for TypeScript Template Engine
 # This Makefile provides targets for development, testing, building, and publishing
 
 # Default target

@@ -1,7 +1,7 @@
 /**
- * ts-tmpl-engine: TypeScript as a template engine
+ * @tmpl/core: TypeScript as a template engine
  * 
- * This module exports all the functionality of the ts-tmpl-engine library.
+ * This module exports all the functionality of the @tmpl/core library.
  * It provides template tag functions for various file types that can be
  * used directly in code, as well as utilities for creating custom templates.
  */
