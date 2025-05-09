@@ -342,7 +342,11 @@ class TemplateDocument<T> extends String {
     this.raw = raw;
     this.data = data;
     this.error = error;
-  }
+   }
+
+   [Symbol.for("Deno.customInspect")](): string {
+    return this.valueOf();
+   }
 
   indent(value: false | number): TemplateDocument<T> {
     return new TemplateDocument<T>(

@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import * as path from "@std/path";
 import { LANGUAGES } from "@tmpl/core";
-import { gen } from "./gen.ts";
+import { gen } from "./mod.ts";
 
 const [destination, source = destination] = Deno.args;
 const errors: any[] = [];
@@ -47,9 +47,31 @@ if (destination) {
   );
 } else {
   const input = await new Response(Deno.stdin.readable).text();
-  const templatePath = "data:application/javascript," + encodeURIComponent(input)
+  // FIXME: for promises top level await don't work in data urls
+  // const templatePath = "data:application/javascript," +
+  //   encodeURIComponent(input);
+  const templatePath = await Deno.makeTempFile({
+    dir: Deno.cwd(),
+    prefix: ".tmpl-stdin-",
+    suffix: ".ts",
+  });
+
+  // Handle signals to ensure temp file cleanup
+  const cleanupTempFile = () => Deno.removeSync(templatePath);
+
+  // Add signal listeners for proper cleanup
+  const signals = ["SIGINT", "SIGTERM", "SIGHUP"] as const;
+  signals.forEach((signal) =>
+    Deno.addSignalListener(signal, () => {
+      cleanupTempFile();
+    })
+  );
+
   try {
-    await gen(templatePath);
+    await Deno.writeTextFile(templatePath, String(input));
+    const content = await gen(templatePath);
+    // Output the generated content to stdout
+    console.log(content);
   } catch (error) {
     if (error instanceof Error) {
       errors.push(
@@ -58,10 +80,21 @@ if (destination) {
         ),
       );
     }
+  } finally {
+    // Remove signal listeners
+    for (const signal of signals) {
+      Deno.removeSignalListener(signal, cleanupTempFile);
+    }
+
+    // Clean up the temp file
+    cleanupTempFile();
   }
 }
 
 if (errors.length > 0) {
-  errors.forEach((error) => console.warn(error.message));
+  errors.forEach((error) => {
+    console.log(error.message);
+    console.warn(error.message);
+  });
   Deno.exit(1);
 }
