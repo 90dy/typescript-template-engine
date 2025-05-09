@@ -1,5 +1,5 @@
 {
-  "version": "0.4.3",
+  "version": "0.5.0",
   "author": "90dy",
   "license": "MIT",
   "workspace": [
@@ -9,7 +9,7 @@
   ],
   "tasks": {
     "dev": "deno run --watch main.ts",
-    "test": "deno test",
+    "test": "deno test -A",
     "build:extension": "cd vscode-extension && vsce package",
     "build:npm": "deno run -A build_npm.ts",
     "demo": "deno run main.ts",
