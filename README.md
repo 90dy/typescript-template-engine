@@ -20,8 +20,8 @@ This monorepo contains the following packages:
 Core template literals functionality with syntax highlighting.
 
 ```bash
-# Using npm
-npm install @tmpl/core
+# Using npm/npx
+npx jsr add @tmpl/core
 
 # Using Deno/JSR
 import { html, css, js } from "jsr:@tmpl/core";
@@ -32,8 +32,8 @@ import { html, css, js } from "jsr:@tmpl/core";
 Code generation CLI for template literals.
 
 ```bash
-# Using npm
-npm install -g @tmpl/gen
+# Using npm/npx
+npx jsr add @tmpl/gen
 
 # Using Deno/JSR
 deno install -A jsr:@tmpl/gen
@@ -190,11 +190,20 @@ export default html`
 `;
 ```
 
-Then generate the files:
+Then generate the files using one of these methods:
 
 ```bash
+# Process input from stdin
+deno run -A jsr:@tmpl/gen < template.html.ts
+
+# Use current directory as both source and destination
 deno run -A jsr:@tmpl/gen
+
+# Specify source and destination directories
+deno run -A jsr:@tmpl/gen ./dist ./src/templates
 ```
+
+The CLI includes signal handling to ensure temporary files are properly cleaned up when processing stdin input, even if the process is interrupted.
 
 ## Development
 

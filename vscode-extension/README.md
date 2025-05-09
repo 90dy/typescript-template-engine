@@ -73,7 +73,7 @@ const documentation = md`
 2. Install the @tmpl/core library:
    ```bash
    # Using npm
-   npm install @tmpl/core
+   npx jsr add @tmpl/core
    
    # Using Deno/JSR
    import { html, css, js } from "jsr:@tmpl/core";

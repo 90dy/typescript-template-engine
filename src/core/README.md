@@ -5,8 +5,8 @@ Core template literals functionality with syntax highlighting for the TypeScript
 ## Installation
 
 ```bash
-# Using npm
-npm install @tmpl/core
+# Using npm/npx
+npx jsr add @tmpl/core
 
 # Using Deno/JSR
 import { html, css, js } from "jsr:@tmpl/core";

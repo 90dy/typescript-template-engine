@@ -5,8 +5,8 @@ Code generation CLI for template literals. This package provides tools for gener
 ## Installation
 
 ```bash
-# Using npm
-npm install -g @tmpl/gen
+# Using npm/npx
+npx jsr add @tmpl/gen
 
 # Using Deno/JSR
 deno install -A jsr:@tmpl/gen
@@ -18,13 +18,22 @@ The `@tmpl/gen` CLI tool can be used to generate files from templates. It looks 
 
 ### Basic Usage
 
-```bash
-# Run the generator in the current directory
-deno run -A jsr:@tmpl/gen
+The CLI can be used in three ways:
 
-# Specify source and destination directories
+```bash
+# 1. Process input from stdin (no arguments)
+deno run -A jsr:@tmpl/gen < template.html.ts
+
+# 2. Use a single directory as both source and destination
+deno run -A jsr:@tmpl/gen ./dist
+
+# 3. Specify separate source and destination directories
 deno run -A jsr:@tmpl/gen ./dist ./src/templates
 ```
+
+When processing from stdin, the generated content is output to stdout. When processing from files, the generated files are written to the destination directory.
+
+The CLI includes signal handling to ensure any temporary files created when processing stdin input are properly cleaned up, even if the process is interrupted (e.g., with Ctrl+C).
 
 ### Template Files
 
@@ -85,24 +94,6 @@ export default function() {
 }
   `;
 }
-```
-
-## API
-
-The `@tmpl/gen` package can also be used programmatically:
-
-```typescript
-import { generateTemplates } from "@tmpl/gen";
-
-// Generate templates from a specific directory
-await generateTemplates("./templates");
-
-// Generate templates with custom options
-await generateTemplates("./templates", {
-  outputDir: "./dist",
-  recursive: true,
-  extensions: ["html", "css", "js"]
-});
 ```
 
 ## License
