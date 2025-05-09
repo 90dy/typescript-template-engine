@@ -59,12 +59,7 @@ if (destination) {
   );
 } else {
   const input = await new Response(Deno.stdin.readable).text();
-  const templatePath = await Deno.makeTempFile({
-    dir: Deno.cwd(),
-    prefix: ".",
-    suffix: ".ts",
-  });
-  await Deno.writeFile(templatePath, new TextEncoder().encode(input));
+  const templatePath = "data:application/javascript," + encodeURIComponent(input)
   try {
     await gen(templatePath);
   } catch (error) {
@@ -76,7 +71,6 @@ if (destination) {
       );
     }
   }
-  await Deno.remove(templatePath);
 }
 
 if (errors.length > 0) {
