@@ -134,26 +134,22 @@ Deno.test("Generate files from source to destination", async () => {
         fixture.replace(/\.ts$/, ""),
       );
 
-      console.log(
-        `Comparing generated file: ${actualOutputPath} with expected file: ${expectedOutputPath}`,
-      )
+      // Check if the file exists
+      try {
+        await fs.stat(actualOutputPath);
+      } catch (error) {
+        throw new Error(`Generated file ${actualOutputPath} does not exist`);
+      }
 
-      // // Check if the file exists
-      // try {
-      //   await fs.stat(actualOutputPath);
-      // } catch (error) {
-      //   throw new Error(`Generated file ${actualOutputPath} does not exist`);
-      // }
+      // Compare the contents
+      const expectedContent = await fs.readFile(expectedOutputPath, {
+        encoding: "utf-8",
+      });
+      const actualContent = await fs.readFile(actualOutputPath, {
+        encoding: "utf-8",
+      });
 
-      // // Compare the contents
-      // const expectedContent = await fs.readFile(expectedOutputPath, {
-      //   encoding: "utf-8",
-      // });
-      // const actualContent = await fs.readFile(actualOutputPath, {
-      //   encoding: "utf-8",
-      // });
-
-      // assertEquals(actualContent.trim(), expectedContent.trim());
+      assertEquals(actualContent.trim(), expectedContent.trim());
     }
   } finally {
     // Clean up temporary directories

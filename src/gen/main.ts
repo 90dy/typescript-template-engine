@@ -21,18 +21,11 @@ if (destination) {
     );
   await Promise.all(
     templateFiles.map(async (file) => {
-      const templatePath = `./${
-        path.relative(source, `${file.parentPath}/${file.name}`)
-      }`;
-      const outputFilePath = `./${
-        path.relative(
-          destination,
-          `${file.parentPath}/${file.name.replace(/.ts$/, "")}`,
-        )
-      }`;
+      const templatePath = path.resolve(source, `${file.name}`)
+      const outputFilePath = path.resolve(destination, file.name.replace(/\.ts$/, ""));
       try {
         const content = await gen(templatePath);
-        console.info(outputFilePath, "generated");
+        console.info(path.relative(Deno.cwd(), outputFilePath), "generated");
         await fs.writeFile(outputFilePath, String(content));
       } catch (error) {
         if (error instanceof Error) {
@@ -47,6 +40,7 @@ if (destination) {
   );
 } else {
   const input = await new Response(Deno.stdin.readable).text();
+
   // FIXME: for promises top level await don't work in data urls
   // const templatePath = "data:application/javascript," +
   //   encodeURIComponent(input);
@@ -58,8 +52,6 @@ if (destination) {
 
   // Handle signals to ensure temp file cleanup
   const cleanupTempFile = () => Deno.removeSync(templatePath);
-
-  // Add signal listeners for proper cleanup
   const signals = ["SIGINT", "SIGTERM", "SIGHUP"] as const;
   signals.forEach((signal) =>
     Deno.addSignalListener(signal, () => {
@@ -85,7 +77,6 @@ if (destination) {
     for (const signal of signals) {
       Deno.removeSignalListener(signal, cleanupTempFile);
     }
-
     // Clean up the temp file
     cleanupTempFile();
   }
