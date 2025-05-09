@@ -1,19 +1,7 @@
 import fs from "node:fs/promises";
 import * as path from "@std/path";
 import { LANGUAGES } from "@tmpl/core";
-
-async function gen(templatePath: string) {
-  let { default: content } = await import(templatePath);
-  if (typeof content === "function") {
-    const result = content();
-    if (typeof result === "string") {
-      content = result;
-    } else if (result instanceof Promise) {
-      content = await result;
-    }
-  }
-  return content;
-}
+import { gen } from "./gen.ts";
 
 const [destination, source = destination] = Deno.args;
 const errors: any[] = [];
@@ -45,7 +33,7 @@ if (destination) {
       try {
         const content = await gen(templatePath);
         console.info(outputFilePath, "generated");
-        await fs.writeFile(outputFilePath, content);
+        await fs.writeFile(outputFilePath, String(content));
       } catch (error) {
         if (error instanceof Error) {
           errors.push(

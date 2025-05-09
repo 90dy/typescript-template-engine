@@ -309,7 +309,10 @@ class TemplateDocument<T> extends String {
       throw?: boolean;
     },
   ) {
-    const raw = String.raw(template, ...substitutions);
+    const raw = String.raw(
+      template,
+      ...substitutions
+    ).replace(/\\([`$])/g, "$1");
 
     let str = raw.toString();
 
@@ -364,6 +367,9 @@ class TemplateDocument<T> extends String {
   parse<TParsed = T>(
     parser: (text: string) => unknown,
   ): TemplateDocument<TParsed> {
+    if (this.data) {
+      return this as unknown as TemplateDocument<TParsed>;
+    }
     return new TemplateDocument<TParsed>(
       this.type,
       { raw: [this.raw] },
