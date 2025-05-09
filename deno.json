@@ -19,7 +19,7 @@
     "@std/path": "jsr:@std/path@^1.0.9",
     "@std/yaml": "jsr:@std/yaml@^1.0.6"
   },
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "TypeScript template engine monorepo",
   "author": "90dy",
   "license": "MIT",
