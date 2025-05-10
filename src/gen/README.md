@@ -1,16 +1,12 @@
 # @tmpl/gen
 
+[![JSR](https://jsr.io/badges/@tmpl/gen)](https://jsr.io/@tmpl/gen)
+[![Version](https://img.shields.io/badge/version-0.5.3-blue.svg)](https://jsr.io/@tmpl/gen)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/90dy/typescript-template-engine/blob/main/LICENSE)
+[![GitHub](https://img.shields.io/badge/github-typescript--template--engine-blue.svg)](https://github.com/90dy/typescript-template-engine)
+[![VSCode Extension](https://img.shields.io/visual-studio-marketplace/v/90dy.ts-tmpl-engine-vscode?label=VSCode%20Extension)](https://marketplace.visualstudio.com/items?itemName=90dy.ts-tmpl-engine-vscode)
+
 Code generation CLI for template literals. This package provides tools for generating code from template files.
-
-## Installation
-
-```bash
-# Using npm/npx
-npx jsr add @tmpl/gen
-
-# Using Deno/JSR
-deno install -A jsr:@tmpl/gen
-```
 
 ## Usage
 
@@ -65,7 +61,9 @@ export default html`
     <h1>${title}</h1>
     <nav>
       <ul>
-        ${navItems.map(item => `<li><a href="#${item.toLowerCase()}">${item}</a></li>`).join('\n        ')}
+        ${navItems.map(item => html`
+          <li><a href="#${item.toLowerCase()}">${item}</a></li>`.indent(-2)
+        )}
       </ul>
     </nav>
   </header>

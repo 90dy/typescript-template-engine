@@ -1,5 +1,11 @@
 # @tmpl/core
 
+[![JSR](https://jsr.io/badges/@tmpl/core)](https://jsr.io/@tmpl/core)
+[![Version](https://img.shields.io/badge/version-0.5.3-blue.svg)](https://jsr.io/@tmpl/core)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/90dy/typescript-template-engine/blob/main/LICENSE)
+[![GitHub](https://img.shields.io/badge/github-typescript--template--engine-blue.svg)](https://github.com/90dy/typescript-template-engine)
+[![VSCode Extension](https://img.shields.io/visual-studio-marketplace/v/90dy.ts-tmpl-engine-vscode?label=VSCode%20Extension)](https://marketplace.visualstudio.com/items?itemName=90dy.ts-tmpl-engine-vscode)
+
 Core template literals functionality with syntax highlighting for the TypeScript Template Engine.
 
 ## Installation
@@ -140,26 +146,17 @@ Template tag functions return a `TemplateDocument` instance, which extends `Stri
 const template = html`<div>${content}</div>`;
 
 // Adjust indentation
-const indented = template.indent(2);  // Indent by 2 spaces
-const noIndent = template.noindent();  // Remove all indentation
+const template = html`<div>${content}</div>`.indent(2);  // Indent by 2 spaces
+const template = html`<div>${content}</div>`.noindent();  // Remove all indentation
+const template = html`<div>${content}</div>`.indent(-2);  // Remove 2 spaces indentation
+
 
 // Parse the template content
-const jsonTemplate = json`{ "name": "${name}" }`;
-const data = jsonTemplate.data;  // Automatically parsed JSON data
+const jsonTemplate = json`{ "name": "${name}" }`.parse();
+const data = jsonTemplate.data;  // Parsed JSON data
 
 // Throw on parse errors
-const strictJson = json`{ "name": "${name}" }`.throw();
-```
-
-### Language Definition Interface
-
-```typescript
-interface LanguageDefinition {
-  extension: string;
-  aliases?: string[];
-  mimeType?: string;
-  description?: string;
-}
+const strictJson = json`{ "name": "${name}" }`.parse().throw();
 ```
 
 ## License

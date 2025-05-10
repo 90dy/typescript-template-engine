@@ -1,5 +1,11 @@
 # TypeScript Template Engine
 
+[![Version](https://img.shields.io/badge/version-0.5.3-blue.svg)](https://github.com/90dy/typescript-template-engine/releases)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/90dy/typescript-template-engine/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/90dy/typescript-template-engine)](https://github.com/90dy/typescript-template-engine/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/90dy/typescript-template-engine)](https://github.com/90dy/typescript-template-engine/issues)
+[![VSCode Extension](https://img.shields.io/visual-studio-marketplace/v/90dy.ts-tmpl-engine-vscode?label=VSCode%20Extension)](https://marketplace.visualstudio.com/items?itemName=90dy.ts-tmpl-engine-vscode)
+
 A monorepo for TypeScript template engine tools and libraries. This project enables using TypeScript template literals with proper syntax highlighting for various file formats in VSCode, along with code generation capabilities.
 
 ## Features
@@ -17,6 +23,9 @@ This monorepo contains the following packages:
 
 ### @tmpl/core
 
+[![JSR](https://jsr.io/badges/@tmpl/core)](https://jsr.io/@tmpl/core)
+[![Version](https://img.shields.io/badge/version-0.5.3-blue.svg)](https://jsr.io/@tmpl/core)
+
 Core template literals functionality with syntax highlighting.
 
 ```bash
@@ -28,6 +37,9 @@ import { html, css, js } from "jsr:@tmpl/core";
 ```
 
 ### @tmpl/gen
+
+[![JSR](https://jsr.io/badges/@tmpl/gen)](https://jsr.io/@tmpl/gen)
+[![Version](https://img.shields.io/badge/version-0.5.3-blue.svg)](https://jsr.io/@tmpl/gen)
 
 Code generation CLI for template literals.
 
@@ -76,6 +88,10 @@ const query = sql`
 ```
 
 ## VSCode Extension
+
+[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/90dy.ts-tmpl-engine-vscode)](https://marketplace.visualstudio.com/items?itemName=90dy.ts-tmpl-engine-vscode)
+[![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/90dy.ts-tmpl-engine-vscode)](https://marketplace.visualstudio.com/items?itemName=90dy.ts-tmpl-engine-vscode)
+[![Visual Studio Marketplace Rating](https://img.shields.io/visual-studio-marketplace/r/90dy.ts-tmpl-engine-vscode)](https://marketplace.visualstudio.com/items?itemName=90dy.ts-tmpl-engine-vscode)
 
 This project includes a VSCode extension that provides syntax highlighting for template literals within TypeScript (.ts) files. To use it:
 
@@ -181,7 +197,9 @@ export default html`
     <h1>${title}</h1>
     <nav>
       <ul>
-        ${navItems.map(item => `<li><a href="#${item.toLowerCase()}">${item}</a></li>`).join('\n        ')}
+        ${navItems.map(item => html`
+          <li><a href="#${item.toLowerCase()}">${item}</a></li>`.indent(-2)
+        ).join('\n        ')}
       </ul>
     </nav>
   </header>
@@ -197,7 +215,7 @@ Then generate the files using one of these methods:
 deno run -A jsr:@tmpl/gen < template.html.ts
 
 # Use current directory as both source and destination
-deno run -A jsr:@tmpl/gen
+deno run -A jsr:@tmpl/gen ./src
 
 # Specify source and destination directories
 deno run -A jsr:@tmpl/gen ./dist ./src/templates
@@ -298,31 +316,6 @@ This will update the version in:
 - src/core/deno.json
 - src/gen/deno.json
 - vscode-extension/package.json
-
-## Testing Templates
-
-@tmpl/core includes utilities for testing templates:
-
-```typescript
-import { html } from "@tmpl/core";
-
-// Test a template
-const template = html`<div>${"Hello, World!"}</div>`;
-console.log(template.toString());
-```
-
-You can also use the template in combination with testing frameworks like Deno Test:
-
-```typescript
-import { assertEquals } from "@std/assert";
-import { html } from "@tmpl/core";
-
-Deno.test("HTML template test", () => {
-  const name = "World";
-  const template = html`<div>Hello, ${name}!</div>`;
-  assertEquals(template.toString(), "<div>Hello, World!</div>");
-});
-```
 
 ## License
 
