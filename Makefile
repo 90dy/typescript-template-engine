@@ -36,11 +36,8 @@ publish: build publish-jsr publish-extension
 # Publish to VSCode Marketplace
 .PHONY: publish-extension
 publish-extension: build-extension
-	@command -v vsce >/dev/null 2>&1 || { echo "Installing vsce..."; npm install -g @vscode/vsce; }
-	@echo "Publishing VSCode extension..."
-	@echo "Note: You need to be logged in to the VSCode Marketplace to publish."
-	@echo "If you haven't logged in yet, run 'vsce login <publisher>' first."
-	cd vscode-extension && vsce publish || { echo "Error: Failed to publish VSCode extension. Make sure you're logged in to the VSCode Marketplace."; exit 1; }
+	@command -v vsce >/dev/null 2>&1 || npm install -g @vscode/vsce
+	cd vscode-extension && vsce publish
 
 # Publish to JSR
 .PHONY: publish-jsr
