@@ -43,7 +43,7 @@ if (destination) {
   );
 } else {
   const input = await new Response(Deno.stdin.readable).text();
-  // FIXME: for promises top level await don't work in data urls
+
   const templatePath = "data:application/typescript," +
     encodeURIComponent(input);
 
