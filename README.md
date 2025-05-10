@@ -41,14 +41,17 @@ import { html, css, js } from "jsr:@tmpl/core";
 [![JSR](https://jsr.io/badges/@tmpl/gen)](https://jsr.io/@tmpl/gen)
 [![Version](https://img.shields.io/badge/version-0.5.3-blue.svg)](https://jsr.io/@tmpl/gen)
 
-Code generation CLI for template literals.
+Code generation CLI for template literals. Create template files with language extensions and generate code from them.
 
 ```bash
-# Using npm/npx
-npx jsr add @tmpl/gen
+# Process input from stdin
+deno run -A jsr:@tmpl/gen < template.html.ts
 
-# Using Deno/JSR
-deno install -A jsr:@tmpl/gen
+# Use current directory as both source and destination
+deno run -A jsr:@tmpl/gen ./src
+
+# Specify source and destination directories
+deno run -A jsr:@tmpl/gen ./dist ./src/templates
 ```
 
 ## Usage Examples
