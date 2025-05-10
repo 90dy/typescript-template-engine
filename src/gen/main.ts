@@ -21,8 +21,11 @@ if (destination) {
     );
   await Promise.all(
     templateFiles.map(async (file) => {
-      const templatePath = path.resolve(source, `${file.name}`)
-      const outputFilePath = path.resolve(destination, file.name.replace(/\.ts$/, ""));
+      const templatePath = path.resolve(source, `${file.name}`);
+      const outputFilePath = path.resolve(
+        destination,
+        file.name.replace(/\.ts$/, ""),
+      );
       try {
         const content = await gen(templatePath);
         console.info(path.relative(Deno.cwd(), outputFilePath), "generated");
@@ -40,27 +43,12 @@ if (destination) {
   );
 } else {
   const input = await new Response(Deno.stdin.readable).text();
-
   // FIXME: for promises top level await don't work in data urls
-  // const templatePath = "data:application/javascript," +
-  //   encodeURIComponent(input);
-  const templatePath = await Deno.makeTempFile({
-    dir: Deno.cwd(),
-    prefix: ".tmpl-stdin-",
-    suffix: ".ts",
-  });
-
-  // Handle signals to ensure temp file cleanup
-  const cleanupTempFile = () => Deno.removeSync(templatePath);
-  const signals = ["SIGINT", "SIGTERM", "SIGHUP"] as const;
-  signals.forEach((signal) =>
-    Deno.addSignalListener(signal, () => {
-      cleanupTempFile();
-    })
-  );
+  const templatePath = "data:application/typescript," +
+    encodeURIComponent(input);
 
   try {
-    await Deno.writeTextFile(templatePath, String(input));
+    // await Deno.writeTextFile(templatePath, String(input));
     const content = await gen(templatePath);
     // Output the generated content to stdout
     console.log(content);
@@ -72,14 +60,8 @@ if (destination) {
         ),
       );
     }
-  } finally {
-    // Remove signal listeners
-    for (const signal of signals) {
-      Deno.removeSignalListener(signal, cleanupTempFile);
-    }
-    // Clean up the temp file
-    cleanupTempFile();
   }
+
 }
 
 if (errors.length > 0) {
