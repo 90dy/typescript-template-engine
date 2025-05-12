@@ -1,6 +1,5 @@
 # TypeScript Template Engine
 
-[![Version](https://img.shields.io/badge/version-0.5.3-blue.svg)](https://github.com/90dy/typescript-template-engine/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/90dy/typescript-template-engine/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/90dy/typescript-template-engine)](https://github.com/90dy/typescript-template-engine/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/90dy/typescript-template-engine)](https://github.com/90dy/typescript-template-engine/issues)
@@ -24,7 +23,6 @@ This monorepo contains the following packages:
 ### @tmpl/core
 
 [![JSR](https://jsr.io/badges/@tmpl/core)](https://jsr.io/@tmpl/core)
-[![Version](https://img.shields.io/badge/version-0.5.3-blue.svg)](https://jsr.io/@tmpl/core)
 
 Core template literals functionality with syntax highlighting.
 
@@ -39,13 +37,12 @@ import { html, css, js } from "jsr:@tmpl/core";
 ### @tmpl/gen
 
 [![JSR](https://jsr.io/badges/@tmpl/gen)](https://jsr.io/@tmpl/gen)
-[![Version](https://img.shields.io/badge/version-0.5.3-blue.svg)](https://jsr.io/@tmpl/gen)
 
 Code generation CLI for template literals. Create template files with language extensions and generate code from them.
 
 ```bash
 # Process input from stdin
-deno run -A jsr:@tmpl/gen < template.html.ts
+deno run -A jsr:@tmpl/gen < index.html.ts
 
 # Use current directory as both source and destination
 deno run -A jsr:@tmpl/gen ./src
@@ -183,7 +180,7 @@ const template = svelte`
 Create template files with language extensions:
 
 ```typescript
-// header.html.ts
+// index.html.ts
 import { html } from "@tmpl/core";
 
 const title = "My Website";
@@ -215,7 +212,7 @@ Then generate the files using one of these methods:
 
 ```bash
 # Process input from stdin
-deno run -A jsr:@tmpl/gen < template.html.ts
+deno run -A jsr:@tmpl/gen < index.html.ts
 
 # Use current directory as both source and destination
 deno run -A jsr:@tmpl/gen ./src

@@ -21,7 +21,7 @@ console.log(`Found version ${version} in deno.json`);
 const filesToUpdate = [
   { path: "./src/core/deno.json", type: "deno" },
   { path: "./src/gen/deno.json", type: "deno" },
-  { path: "./vscode-extension/package.json", type: "package" }
+  { path: "./vscode-extension/package.json", type: "package" },
 ];
 
 // Update each file

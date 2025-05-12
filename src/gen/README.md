@@ -1,7 +1,6 @@
 # @tmpl/gen
 
 [![JSR](https://jsr.io/badges/@tmpl/gen)](https://jsr.io/@tmpl/gen)
-[![Version](https://img.shields.io/badge/version-0.5.3-blue.svg)](https://jsr.io/@tmpl/gen)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/90dy/typescript-template-engine/blob/main/LICENSE)
 [![GitHub](https://img.shields.io/badge/github-typescript--template--engine-blue.svg)](https://github.com/90dy/typescript-template-engine)
 [![VSCode Extension](https://img.shields.io/visual-studio-marketplace/v/90dy.ts-tmpl-engine-vscode?label=VSCode%20Extension)](https://marketplace.visualstudio.com/items?itemName=90dy.ts-tmpl-engine-vscode)
@@ -18,7 +17,7 @@ The CLI can be used in three ways:
 
 ```bash
 # 1. Process input from stdin (no arguments)
-deno run -A jsr:@tmpl/gen < template.html.ts
+deno run -A jsr:@tmpl/gen < index.html.ts
 
 # 2. Use a single directory as both source and destination
 deno run -A jsr:@tmpl/gen ./dist
@@ -35,7 +34,7 @@ The CLI includes signal handling to ensure any temporary files created when proc
 
 Template files should be TypeScript files that export a default function or string. The file name should end with a language extension followed by `.ts`, for example:
 
-- `header.html.ts` - Generates `header.html`
+- `index.html.ts` - Generates `header.html`
 - `styles.css.ts` - Generates `styles.css`
 - `query.sql.ts` - Generates `query.sql`
 
@@ -44,7 +43,7 @@ The generator will automatically find all template files that match the pattern 
 ### Example Template File
 
 ```typescript
-// header.html.ts
+// index.html.ts
 import { html } from "@tmpl/core";
 
 const title = "My Website";

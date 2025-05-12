@@ -5,7 +5,6 @@
 [![Visual Studio Marketplace Rating](https://img.shields.io/visual-studio-marketplace/r/90dy.ts-tmpl-engine-vscode)](https://marketplace.visualstudio.com/items?itemName=90dy.ts-tmpl-engine-vscode)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/90dy/typescript-template-engine/blob/main/LICENSE)
 [![GitHub](https://img.shields.io/badge/github-typescript--template--engine-blue.svg)](https://github.com/90dy/typescript-template-engine)
-[![Version](https://img.shields.io/badge/version-0.5.3-blue.svg)](https://github.com/90dy/typescript-template-engine/releases)
 
 This VSCode extension provides syntax highlighting for template literals in TypeScript (.ts) and JavaScript (.js) files. It allows you to use TypeScript as a template engine through template literals directly in your code files without requiring any special file extensions.
 
@@ -81,7 +80,6 @@ This extension is part of the TypeScript Template Engine ecosystem, which includ
 ### @tmpl/core
 
 [![JSR](https://jsr.io/badges/@tmpl/core)](https://jsr.io/@tmpl/core)
-[![Version](https://img.shields.io/badge/version-0.5.3-blue.svg)](https://jsr.io/@tmpl/core)
 
 Core template literals functionality with syntax highlighting.
 
@@ -96,13 +94,12 @@ import { html, css, js } from "jsr:@tmpl/core";
 ### @tmpl/gen
 
 [![JSR](https://jsr.io/badges/@tmpl/gen)](https://jsr.io/@tmpl/gen)
-[![Version](https://img.shields.io/badge/version-0.5.3-blue.svg)](https://jsr.io/@tmpl/gen)
 
 Code generation CLI for template literals. Create template files with language extensions and generate code from them.
 
 ```bash
 # Process input from stdin
-deno run -A jsr:@tmpl/gen < template.html.ts
+deno run -A jsr:@tmpl/gen < index.html.ts
 
 # Use current directory as both source and destination
 deno run -A jsr:@tmpl/gen ./src
