@@ -3,7 +3,8 @@ import * as path from "@std/path";
 import { LANGUAGES } from "@tmpl/core";
 import { gen } from "./mod.ts";
 
-const [destination, source = destination] = Deno.args;
+let [destination, source = destination] = Deno.args
+
 const errors: any[] = [];
 
 if (destination) {
@@ -21,14 +22,18 @@ if (destination) {
     );
   await Promise.all(
     templateFiles.map(async (file) => {
-      const templatePath = path.resolve(source, `${file.name}`);
-      const outputFilePath = path.resolve(
+      const templatePath = path.resolve(file.parentPath, file.name);
+      const outputFilePath = path.join(
         destination,
+        path.relative(source, file.parentPath),
         file.name.replace(/\.ts$/, ""),
       );
       try {
         const content = await gen(templatePath);
         console.info(path.relative(Deno.cwd(), outputFilePath), "generated");
+        await fs.mkdir(path.dirname(outputFilePath), {
+          recursive: true,
+        });
         await fs.writeFile(outputFilePath, String(content));
       } catch (error) {
         if (error instanceof Error) {
@@ -43,7 +48,6 @@ if (destination) {
   );
 } else {
   const input = await new Response(Deno.stdin.readable).text();
-  // FIXME: for promises top level await don't work in data urls
   const templatePath = "data:application/typescript," +
     encodeURIComponent(input);
 
@@ -51,7 +55,7 @@ if (destination) {
     // await Deno.writeTextFile(templatePath, String(input));
     const content = await gen(templatePath);
     // Output the generated content to stdout
-    console.log(content);
+    await Deno.stdout.write(new TextEncoder().encode(content));
   } catch (error) {
     if (error instanceof Error) {
       errors.push(

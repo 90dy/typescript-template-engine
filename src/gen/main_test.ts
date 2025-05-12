@@ -1,9 +1,10 @@
 import { assertEquals } from "@std/assert";
 import * as path from "@std/path";
 import * as fs from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 
-export function getFixturePath(filename: string): string {
-  return path.join(Deno.cwd(), "src", "gen", "fixtures", filename);
+export function getFixturePath(filepath: string): string {
+  return path.join(Deno.cwd(), "src", "gen", "fixtures", filepath);
 }
 
 // Helper function to compare generated content with expected output
@@ -92,12 +93,17 @@ Deno.test("Generate stdin test", createTest("test-stdin.sh.ts"));
 // Test destination source generation
 Deno.test("Generate files from source to destination", async () => {
   // Create temporary directories for source and destination
-  const souceDir = path.join(Deno.cwd(), "src", "gen", "fixtures");
+  const sourceDir = path.join(Deno.cwd(), "src", "gen", "fixtures");
   const tempDestDir = await Deno.makeTempDir({ prefix: "tmpl-test-dest-" });
 
   try {
     // Copy test template files to the source directory
-    const fixtures = Deno.readDirSync(souceDir).map((file) => file.name);
+    const fixtures = (await fs.readdir(sourceDir, {
+      withFileTypes: true,
+      recursive: true,
+    })).filter((file) => file.isFile() && file.name.endsWith(".ts")).map((
+      file,
+    ) => path.join(path.relative(sourceDir, file.parentPath), file.name));
 
     // Run the main.ts script with destination and source arguments
     const command = new Deno.Command(Deno.execPath(), {
@@ -108,7 +114,7 @@ Deno.test("Generate files from source to destination", async () => {
         "--allow-env",
         "src/gen/main.ts",
         tempDestDir,
-        souceDir,
+        sourceDir,
       ],
       stdout: "piped",
       stderr: "piped",
@@ -128,10 +134,12 @@ Deno.test("Generate files from source to destination", async () => {
 
     // Verify that the generated files exist and match the expected output
     for (const fixture of fixtures) {
-      const expectedOutputPath = getFixturePath(fixture.replace(/\.ts$/, ""));
-      const actualOutputPath = path.join(
-        tempDestDir,
+      const expectedFixtureOutputPath = getFixturePath(
         fixture.replace(/\.ts$/, ""),
+      );
+      const actualOutputPath = expectedFixtureOutputPath.replace(
+        /.*src\/gen\/fixtures/,
+        tempDestDir,
       );
 
       // Check if the file exists
@@ -142,19 +150,22 @@ Deno.test("Generate files from source to destination", async () => {
       }
 
       // Compare the contents
-      const expectedContent = await fs.readFile(expectedOutputPath, {
-        encoding: "utf-8",
-      });
+      const expectedFixtureContent = await fs.readFile(
+        expectedFixtureOutputPath,
+        {
+          encoding: "utf-8",
+        },
+      );
       const actualContent = await fs.readFile(actualOutputPath, {
         encoding: "utf-8",
       });
 
-      assertEquals(actualContent.trim(), expectedContent.trim());
+      assertEquals(actualContent.trim(), expectedFixtureContent.trim());
     }
   } finally {
     // Clean up temporary directories
     try {
-      console.log('tempDestDir', tempDestDir);
+      console.log("tempDestDir", tempDestDir);
       // await Deno.remove(tempDestDir, { recursive: true });
     } catch (error) {
       console.error("Error cleaning up temporary directories:", error);

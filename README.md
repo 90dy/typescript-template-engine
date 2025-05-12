@@ -257,17 +257,6 @@ make demo
 
 This project uses GitHub Actions and semantic-release for automated publishing with semantic versioning.
 
-### Automated Publishing
-
-When changes are pushed to the main branch, the GitHub Actions workflow will:
-
-1. Determine the next version based on commit messages
-2. Update the version in package configurations
-3. Generate a changelog
-4. Create a GitHub release
-5. Build the packages using dnt
-6. Publish to npm, VSCode Marketplace, and JSR
-
 ### Commit Message Format
 
 This project follows the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages:
