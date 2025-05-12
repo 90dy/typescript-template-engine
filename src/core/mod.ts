@@ -66,6 +66,12 @@ export const LANGUAGES: Record<string, LanguageDefinition> = {
     mimeType: "application/xml",
     description: "Extensible Markup Language",
   },
+  yml: {
+    extension: "yaml",
+    aliases: ["yaml"],
+    mimeType: "application/yaml",
+    description: "YAML Ain't Markup Language",
+  },
   yaml: {
     extension: "yaml",
     aliases: ["yml"],

@@ -3,7 +3,7 @@
   "displayName": "TypeScript Template Engine",
   "description": "Use TypeScript as a template engine with syntax highlighting for template tag functions",
   "publisher": "90dy",
-  "version": "0.5.17",
+  "version": "0.5.18",
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.60.0"
@@ -123,6 +123,19 @@
         "path": "./syntaxes/xml.json",
         "embeddedLanguages": {
           "meta.embedded.block.xml": "xml"
+        }
+      },
+      {
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ],
+        "scopeName": "inline.yaml.template",
+        "path": "./syntaxes/yaml.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.yaml": "yaml"
         }
       },
       {
