@@ -1,9 +1,17 @@
 import fs from "node:fs/promises";
 import * as path from "@std/path";
 import { LANGUAGES } from "@tmpl/core";
-import { gen } from "./mod.ts";
 
 let [destination, source = destination] = Deno.args
+
+async function gen(templatePath: string): Promise<string> {
+  const { default: content } = await import(templatePath);
+  if (typeof content === "function") {
+    return await content();
+  } else {
+    return await content;
+  }
+}
 
 const errors: any[] = [];
 
@@ -29,7 +37,7 @@ if (destination) {
         file.name.replace(/\.ts$/, ""),
       );
       try {
-        const content = await gen(templatePath);
+        const content = await gen(`file://${templatePath}`);
         console.info(path.relative(Deno.cwd(), outputFilePath), "generated");
         await fs.mkdir(path.dirname(outputFilePath), {
           recursive: true,
@@ -70,7 +78,6 @@ if (destination) {
 
 if (errors.length > 0) {
   errors.forEach((error) => {
-    console.log(error.message);
     console.warn(error.message);
   });
   Deno.exit(1);

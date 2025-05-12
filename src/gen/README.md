@@ -5,7 +5,7 @@
 [![GitHub](https://img.shields.io/badge/github-typescript--template--engine-blue.svg)](https://github.com/90dy/typescript-template-engine)
 [![VSCode Extension](https://img.shields.io/visual-studio-marketplace/v/90dy.ts-tmpl-engine-vscode?label=VSCode%20Extension)](https://marketplace.visualstudio.com/items?itemName=90dy.ts-tmpl-engine-vscode)
 
-Code generation CLI for template literals. This package provides tools for generating code from template files.
+Code generation CLI for template literals. This package provides tools for generating code from template files. It includes pre-compiled binaries for various platforms and architectures.
 
 ## Usage
 

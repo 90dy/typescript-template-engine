@@ -1,5 +1,5 @@
 {
-  "version": "0.5.11",
+  "version": "0.5.17",
   "author": "90dy",
   "license": "MIT",
   "workspace": [
@@ -20,7 +20,8 @@
     "@std/assert": "jsr:@std/assert@1",
     "@deno/dnt": "jsr:@deno/dnt@^0.41.3",
     "@std/path": "jsr:@std/path@^1.0.9",
-    "@std/yaml": "jsr:@std/yaml@^1.0.6"
+    "@std/yaml": "jsr:@std/yaml@^1.0.6",
+    "@std/fs": "jsr:@std/fs@^1.0.0"
   },
   "description": "TypeScript template engine monorepo",
   "repository": {

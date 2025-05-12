@@ -11,14 +11,23 @@
     "include": [
       "**/*.ts",
       "README.md",
-      "deno.json"
+      "deno.json",
+      "bin/**/*"
     ],
     "exclude": [
       "**/*.test.ts"
     ]
   },
   "exports": {
-    ".": "./main.ts"
+    ".": "./runner.ts",
+    "./main.ts": "./main.ts"
   },
-  "version": "0.5.11"
+  "tasks": {
+    "build": "deno run -A build.ts",
+    "build:all": "deno task build"
+  },
+  "bin": {
+    "tmpl-gen": "./runner.ts"
+  },
+  "version": "0.5.17"
 }

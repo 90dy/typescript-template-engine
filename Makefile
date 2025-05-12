@@ -3,7 +3,7 @@
 
 # Default target
 .PHONY: all
-all: sync-version generate-syntaxes test build publish
+all: sync-version generate-syntaxes build test build publish
 
 # Testing
 .PHONY: test

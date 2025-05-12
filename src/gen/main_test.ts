@@ -165,8 +165,7 @@ Deno.test("Generate files from source to destination", async () => {
   } finally {
     // Clean up temporary directories
     try {
-      console.log("tempDestDir", tempDestDir);
-      // await Deno.remove(tempDestDir, { recursive: true });
+      await Deno.remove(tempDestDir, { recursive: true });
     } catch (error) {
       console.error("Error cleaning up temporary directories:", error);
     }
