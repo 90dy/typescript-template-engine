@@ -3,7 +3,7 @@
   "displayName": "TypeScript Template Engine",
   "description": "Use TypeScript as a template engine with syntax highlighting for template tag functions",
   "publisher": "90dy",
-  "version": "0.5.19",
+  "version": "0.5.20",
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.60.0"

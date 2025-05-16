@@ -304,7 +304,7 @@ class TemplateDocument<T> extends String {
   public readonly type: string;
   public readonly raw: string;
   public data?: T;
-  private readonly error?: Error;
+  private error?: Error;
   private parser?: (text: string) => unknown;
   constructor(
     type: string,
@@ -324,15 +324,21 @@ class TemplateDocument<T> extends String {
     let str = raw.toString();
 
     // Handle indentation if specified
-    if (options?.indent) {
-      str = str.replace(
-        /^\s+/gm,
-        (match) => match.slice(options.indent as number),
-      );
+    if (typeof options?.indent === 'number') {
+      if (options.indent > 0) {
+        const indent = " ".repeat(options.indent);
+        str = str.replace(/^(?!\s*$)/gm, indent);
+      } else {
+        str = str.replace(/^\s+/gm, (match) => {
+          return match.slice(0, match.length + (options.indent as number));
+        });
+      }
+
     }
     if (options?.indent === false) {
       str = str.replace(/^\s+/gm, "");
     }
+
 
     super(str);
     this.type = type;
@@ -371,7 +377,7 @@ class TemplateDocument<T> extends String {
     try {
       this.data = this.parser?.(this.raw) as T;
     } catch (error) {
-      console.warn(error);
+      this.error = error as Error;
     }
     return this as unknown as TemplateDocument<TParsed>; 
   }

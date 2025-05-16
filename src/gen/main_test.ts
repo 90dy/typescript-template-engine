@@ -1,7 +1,6 @@
 import { assertEquals } from "@std/assert";
 import * as path from "@std/path";
 import * as fs from "node:fs/promises";
-import { fileURLToPath } from "node:url";
 
 export function getFixturePath(filepath: string): string {
   return path.join(Deno.cwd(), "src", "gen", "fixtures", filepath);
@@ -20,7 +19,7 @@ async function compareWithExpectedOutput(
   });
 
   // Compare the contents
-  assertEquals(generatedContent.trim(), expectedContent.trim());
+  assertEquals(generatedContent, expectedContent);
 }
 
 // Helper function to run the main.ts script with stdin input
@@ -72,23 +71,14 @@ function createTest(templateName: string) {
   };
 }
 
-Deno.test("Generate HTML from stdin", createTest("test.html.ts"));
-
-Deno.test("Generate CSS from stdin", createTest("test.css.ts"));
-
-Deno.test("Generate JavaScript from stdin", createTest("test.js.ts"));
-
-Deno.test(
-  "Generate HTML from function template via stdin",
-  createTest("test-function.html.ts"),
-);
-
-Deno.test(
-  "Generate HTML from async function template via stdin",
-  createTest("test-async.html.ts"),
-);
-
-Deno.test("Generate stdin test", createTest("test-stdin.sh.ts"));
+// List all files *.ts in the fixtures directory
+const fixturesDir = path.join(Deno.cwd(), "src", "gen", "fixtures");
+const templatePaths = (await fs.readdir(fixturesDir, {
+  recursive: true,
+})).filter((file) => file.endsWith(".ts"));
+for (const file of templatePaths) {
+    Deno.test(`Generate ${file} from stdin`, createTest(file));
+}
 
 // Test destination source generation
 Deno.test("Generate files from source to destination", async () => {
