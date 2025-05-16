@@ -338,7 +338,11 @@ class TemplateClass<T = unknown> extends String {
 
     }
     if (options?.indent === false) {
-      str = str.replace(/^\s+/gm, "");
+      // Get the first non-empty line to determine the indentation
+      const lines = str.split("\n");
+      const nonEmptyLine = lines.find(line => line.trim() !== "") || "";
+      const indent = nonEmptyLine.match(/^\s+/)?.[0]?.length || 0;
+      str = lines.map(line => line.slice(indent)).join("\n");
     }
 
 

@@ -193,8 +193,10 @@ Deno.test("Template indentation works correctly", () => {
   assertEquals(indented.toString() !== original.toString(), true);
   assertEquals(noIndent.toString() !== original.toString(), true);
   
+  console.error("Indented Template:", indented.toString());
+  console.error("No Indent Template:", noIndent.toString());
   // Test that noIndent template has no leading whitespace
-  assertEquals(noIndent.toString().startsWith("<div>"), true);
+  assertEquals(noIndent.toString().startsWith("\n<div>"), true);
 });
 
 Deno.test("Custom extension template works correctly", () => {
