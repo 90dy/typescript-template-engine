@@ -3,7 +3,7 @@
 [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/90dy.ts-tmpl-engine-vscode)](https://marketplace.visualstudio.com/items?itemName=90dy.ts-tmpl-engine-vscode)
 [![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/90dy.ts-tmpl-engine-vscode)](https://marketplace.visualstudio.com/items?itemName=90dy.ts-tmpl-engine-vscode)
 [![Visual Studio Marketplace Rating](https://img.shields.io/visual-studio-marketplace/r/90dy.ts-tmpl-engine-vscode)](https://marketplace.visualstudio.com/items?itemName=90dy.ts-tmpl-engine-vscode)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/90dy/typescript-template-engine/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](https://github.com/90dy/typescript-template-engine/blob/main/LICENSE)
 [![GitHub](https://img.shields.io/badge/github-typescript--template--engine-blue.svg)](https://github.com/90dy/typescript-template-engine)
 
 This VSCode extension provides syntax highlighting for template literals in TypeScript (.ts) and JavaScript (.js) files. It allows you to use TypeScript as a template engine through template literals directly in your code files without requiring any special file extensions.

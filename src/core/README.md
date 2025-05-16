@@ -1,7 +1,7 @@
 # @tmpl/core
 
 [![JSR](https://jsr.io/badges/@tmpl/core)](https://jsr.io/@tmpl/core)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/90dy/typescript-template-engine/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](https://github.com/90dy/typescript-template-engine/blob/main/LICENSE)
 [![GitHub](https://img.shields.io/badge/github-typescript--template--engine-blue.svg)](https://github.com/90dy/typescript-template-engine)
 [![VSCode Extension](https://img.shields.io/visual-studio-marketplace/v/90dy.ts-tmpl-engine-vscode?label=VSCode%20Extension)](https://marketplace.visualstudio.com/items?itemName=90dy.ts-tmpl-engine-vscode)
 

@@ -161,7 +161,7 @@ Deno.test("JSON template parses correctly", () => {
       "name": "${name}",
       "version": "${version}"
     }
-  `;
+  `.parse();
   
   // Test that the template has parsed data
   assertEquals(jsonTemplate.data !== undefined, true);
@@ -176,7 +176,7 @@ Deno.test("YAML template parses correctly", () => {
   const yamlTemplate = yaml<{ name: string; version: string }>`
     name: ${name}
     version: ${version}
-  `;
+  `.parse();
   
   // Test that the template has parsed data
   assertEquals(yamlTemplate.data !== undefined, true);
@@ -212,7 +212,7 @@ Deno.test("Custom extension template works correctly", () => {
 
 Deno.test("Template with parser works correctly", () => {
   const parser = (text: string) => ({ parsed: text });
-  const customTemplate = ext("custom", parser)<{ parsed: string }>`Test content`;
+  const customTemplate = ext("custom", parser)<{ parsed: string }>`Test content`.parse();
   
   // Test that the template has parsed data
   assertEquals(customTemplate.data !== undefined, true);

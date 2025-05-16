@@ -303,8 +303,9 @@ export const LANGUAGES: Record<string, LanguageDefinition> = {
 class TemplateDocument<T> extends String {
   public readonly type: string;
   public readonly raw: string;
-  public readonly data?: T;
+  public data?: T;
   private readonly error?: Error;
+  private parser?: (text: string) => unknown;
   constructor(
     type: string,
     template: { raw: readonly string[] | ArrayLike<string> },
@@ -333,21 +334,10 @@ class TemplateDocument<T> extends String {
       str = str.replace(/^\s+/gm, "");
     }
 
-    let data: T | undefined = undefined;
-    let error = undefined;
-    try {
-      data = parser?.(str) as T;
-    } catch (error) {
-      if (options?.throw) {
-        throw error;
-      }
-      console.warn(error);
-    }
     super(str);
     this.type = type;
     this.raw = raw;
-    this.data = data;
-    this.error = error;
+    this.parser = parser;
    }
 
    [Symbol.for("Deno.customInspect")](): string {
@@ -375,17 +365,15 @@ class TemplateDocument<T> extends String {
     return this;
   }
   parse<TParsed = T>(
-    parser: (text: string) => unknown,
+    parser?: (text: string) => TParsed,
   ): TemplateDocument<TParsed> {
-    if (this.data) {
-      return this as unknown as TemplateDocument<TParsed>;
+    this.parser = parser ?? this.parser;
+    try {
+      this.data = this.parser?.(this.raw) as T;
+    } catch (error) {
+      console.warn(error);
     }
-    return new TemplateDocument<TParsed>(
-      this.type,
-      { raw: [this.raw] },
-      [],
-      parser,
-    );
+    return this as unknown as TemplateDocument<TParsed>; 
   }
 }
 
@@ -440,9 +428,9 @@ export const sql: Ext<"sql"> = ext("sql");
 export const graphql: Ext<"graphql"> = ext("graphql");
 
 // Shell scripting
-export const sh: Ext<"sh"> = ext("sh", undefined, { indent: false });
-export const ps1: Ext<"ps1"> = ext("ps1", undefined, { indent: false });
-export const bat: Ext<"bat"> = ext("bat", undefined, { indent: false });
+export const sh: Ext<"sh"> = ext("sh");
+export const ps1: Ext<"ps1"> = ext("ps1");
+export const bat: Ext<"bat"> = ext("bat");
 
 // Programming languages
 export const py: Ext<"py"> = ext("py");

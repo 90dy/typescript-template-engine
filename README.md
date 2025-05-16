@@ -1,6 +1,6 @@
 # TypeScript Template Engine
 
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/90dy/typescript-template-engine/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](https://github.com/90dy/typescript-template-engine/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/90dy/typescript-template-engine)](https://github.com/90dy/typescript-template-engine/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/90dy/typescript-template-engine)](https://github.com/90dy/typescript-template-engine/issues)
 [![VSCode Extension](https://img.shields.io/visual-studio-marketplace/v/90dy.ts-tmpl-engine-vscode?label=VSCode%20Extension)](https://marketplace.visualstudio.com/items?itemName=90dy.ts-tmpl-engine-vscode)
@@ -240,14 +240,8 @@ make generate-syntaxes
 # Sync version from deno.json to all workspace files
 make sync-version
 
-# Build all packages
-make build
-
 # Build the VSCode extension
 make build-extension
-
-# Clean build artifacts
-make clean
 
 # Run the demo
 make demo

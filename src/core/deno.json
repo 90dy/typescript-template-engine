@@ -20,5 +20,5 @@
   "exports": {
     ".": "./mod.ts"
   },
-  "version": "0.5.18"
+  "version": "0.5.19"
 }
