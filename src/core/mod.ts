@@ -300,7 +300,9 @@ export const LANGUAGES: Record<string, LanguageDefinition> = {
   },
 };
 
-class TemplateDocument<T> extends String {
+type Template<T> = string & TemplateClass<T>;
+
+class TemplateClass<T = unknown> extends String {
   public readonly type: string;
   public readonly raw: string;
   public data?: T;
@@ -350,8 +352,8 @@ class TemplateDocument<T> extends String {
     return this.valueOf();
    }
 
-  indent(value: false | number): TemplateDocument<T> {
-    return new TemplateDocument<T>(
+  indent(value: false | number): Template<T> {
+    return new TemplateClass<T>(
       this.type,
       { raw: [this.raw] },
       [],
@@ -359,27 +361,27 @@ class TemplateDocument<T> extends String {
       {
         indent: value,
       },
-    );
+    ) as Template<T>;
   }
-  noindent(): TemplateDocument<T> {
+  noindent(): Template<T> {
     return this.indent(false);
   }
-  throw(): TemplateDocument<T> {
+  throw(): Template<T> | never {
     if (this.error) {
       throw this.error;
     }
-    return this;
+    return this as unknown as Template<T>;
   }
   parse<TParsed = T>(
     parser?: (text: string) => TParsed,
-  ): TemplateDocument<TParsed> {
+  ): Template<TParsed> {
     this.parser = parser ?? this.parser;
     try {
       this.data = this.parser?.(this.raw) as T;
     } catch (error) {
       this.error = error as Error;
     }
-    return this as unknown as TemplateDocument<TParsed>; 
+    return this as unknown as Template<TParsed>;
   }
 }
 
@@ -396,16 +398,16 @@ export function ext<Type extends string>(
     indent: false | number;
   },
 ): Ext<Type> {
-  return (
+  return <T>(
     template: { raw: readonly string[] | ArrayLike<string> },
     ...substitutions: any[]
-  ) => new TemplateDocument(type, template, substitutions, parser, options);
+  ) => new TemplateClass(type, template, substitutions, parser, options) as Template<T>;
 }
 
 type Ext<Type extends string> = <T>(
   template: { raw: readonly string[] | ArrayLike<string> },
   ...substitutions: any[]
-) => TemplateDocument<T>;
+) => Template<T>;
 
 // Export all template functions individually
 // Web languages

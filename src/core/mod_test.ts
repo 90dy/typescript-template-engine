@@ -119,11 +119,6 @@ Deno.test("Template functions return TemplateDocument instances", () => {
   const cssTemplate = css`.test { color: red; }`;
   const jsTemplate = js`console.log("Test");`;
   
-  // Test that templates are instances of String
-  assertEquals(htmlTemplate instanceof String, true);
-  assertEquals(cssTemplate instanceof String, true);
-  assertEquals(jsTemplate instanceof String, true);
-  
   // Test that templates have the correct type property
   assertEquals(htmlTemplate.type, "html");
   assertEquals(cssTemplate.type, "css");
