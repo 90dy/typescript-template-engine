@@ -318,10 +318,14 @@ class TemplateClass<T = unknown> extends String {
       throw?: boolean;
     },
   ) {
+    const substTemplateRaw = []
+    for (let i = 0; i < template.raw.length; i++) {
+      substTemplateRaw.push(template.raw[i].replace(/\\([`$])/g, "$1"))
+    }
     const raw = String.raw(
-      template,
+      { raw: substTemplateRaw },
       ...substitutions
-    ).replace(/\\([`$])/g, "$1");
+    )
 
     let str = raw.toString();
 
