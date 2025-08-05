@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import * as path from "@std/path";
 import { LANGUAGES } from "@tmpl/core";
 
-let [destination, source = destination] = Deno.args
+const [destination, source = destination] = Deno.args;
 
 async function gen(templatePath: string): Promise<string> {
   const { default: content } = await import(templatePath);
@@ -13,7 +13,7 @@ async function gen(templatePath: string): Promise<string> {
   }
 }
 
-const errors: any[] = [];
+const errors: unknown[] = [];
 
 if (destination) {
   const templateFiles = await fs
@@ -73,12 +73,15 @@ if (destination) {
       );
     }
   }
-
 }
 
 if (errors.length > 0) {
   errors.forEach((error) => {
-    console.warn(error.message);
+    if (error instanceof Error) {
+      console.warn(error.message);
+    } else {
+      console.warn("Unknown error:", error);
+    }
   });
   Deno.exit(1);
 }

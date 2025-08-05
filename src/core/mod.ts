@@ -399,84 +399,84 @@ class TemplateClass<T = unknown> extends String {
  * @param extension The file extension (without the dot)
  * @returns A template tag function for the specified extension
  */
-export function ext<Type extends string>(
+export function tag<Type extends string>(
   type: Type,
   parser?: (text: string) => unknown,
   options?: {
     indent: false | number;
   },
-): Ext<Type> {
+): Tag<Type> {
   return <T>(
     template: { raw: readonly string[] | ArrayLike<string> },
     ...substitutions: any[]
   ) => new TemplateClass(type, template, substitutions, parser, options) as Template<T>;
 }
 
-type Ext<Type extends string> = <T>(
+type Tag<Type extends string> = <T>(
   template: { raw: readonly string[] | ArrayLike<string> },
   ...substitutions: any[]
 ) => Template<T>;
 
 // Export all template functions individually
 // Web languages
-export const html: Ext<"html"> = ext("html");
-export const css: Ext<"css"> = ext("css");
-export const js: Ext<"js"> = ext("js");
-export const ts: Ext<"ts"> = ext("ts");
-export const jsx: Ext<"jsx"> = ext("jsx");
-export const tsx: Ext<"tsx"> = ext("tsx");
+export const html: Tag<"html"> = tag("html");
+export const css: Tag<"css"> = tag("css");
+export const js: Tag<"js"> = tag("js");
+export const ts: Tag<"ts"> = tag("ts");
+export const jsx: Tag<"jsx"> = tag("jsx");
+export const tsx: Tag<"tsx"> = tag("tsx");
 
 // Data formats
-export const json: Ext<"json"> = ext("json", JSON.parse);
-export const xml: Ext<"xml"> = ext("xml");
-export const yaml: Ext<"yaml"> = ext("yaml", YAML.parse);
-export const toml: Ext<"toml"> = ext("toml");
-export const ini: Ext<"ini"> = ext("ini");
-export const csv: Ext<"csv"> = ext("csv");
+export const json: Tag<"json"> = tag("json", JSON.parse);
+export const xml: Tag<"xml"> = tag("xml");
+export const yaml: Tag<"yaml"> = tag("yaml", YAML.parse);
+export const toml: Tag<"toml"> = tag("toml");
+export const ini: Tag<"ini"> = tag("ini");
+export const csv: Tag<"csv"> = tag("csv");
 
 // Markup languages
-export const md: Ext<"md"> = ext("md");
-export const tex: Ext<"tex"> = ext("tex");
-export const rst: Ext<"rst"> = ext("rst");
+export const md: Tag<"md"> = tag("md");
+export const tex: Tag<"tex"> = tag("tex");
+export const rst: Tag<"rst"> = tag("rst");
 
 // Query languages
-export const sql: Ext<"sql"> = ext("sql");
-export const graphql: Ext<"graphql"> = ext("graphql");
+export const sql: Tag<"sql"> = tag("sql");
+export const graphql: Tag<"graphql"> = tag("graphql");
 
 // Shell scripting
-export const sh: Ext<"sh"> = ext("sh");
-export const ps1: Ext<"ps1"> = ext("ps1");
-export const bat: Ext<"bat"> = ext("bat");
+export const sh: Tag<"sh"> = tag("sh");
+export const ps1: Tag<"ps1"> = tag("ps1");
+export const bat: Tag<"bat"> = tag("bat");
 
 // Programming languages
-export const py: Ext<"py"> = ext("py");
-export const rb: Ext<"rb"> = ext("rb");
-export const go: Ext<"go"> = ext("go");
-export const rs: Ext<"rs"> = ext("rs");
-export const c: Ext<"c"> = ext("c");
-export const cpp: Ext<"cpp"> = ext("cpp");
-export const cs: Ext<"cs"> = ext("cs");
-export const java: Ext<"java"> = ext("java");
-export const php: Ext<"php"> = ext("php");
-export const swift: Ext<"swift"> = ext("swift");
-export const kt: Ext<"kt"> = ext("kt");
-export const scala: Ext<"scala"> = ext("scala");
-export const dart: Ext<"dart"> = ext("dart");
-export const lua: Ext<"lua"> = ext("lua");
-export const pl: Ext<"pl"> = ext("pl");
-export const r: Ext<"r"> = ext("r");
-export const elm: Ext<"elm"> = ext("elm");
-export const fs: Ext<"fs"> = ext("fs");
-export const clj: Ext<"clj"> = ext("clj");
-export const hs: Ext<"hs"> = ext("hs");
+export const py: Tag<"py"> = tag("py");
+export const rb: Tag<"rb"> = tag("rb");
+export const go: Tag<"go"> = tag("go");
+export const rs: Tag<"rs"> = tag("rs");
+export const c: Tag<"c"> = tag("c");
+export const cpp: Tag<"cpp"> = tag("cpp");
+export const cs: Tag<"cs"> = tag("cs");
+export const java: Tag<"java"> = tag("java");
+export const php: Tag<"php"> = tag("php");
+export const swift: Tag<"swift"> = tag("swift");
+export const kt: Tag<"kt"> = tag("kt");
+export const scala: Tag<"scala"> = tag("scala");
+export const dart: Tag<"dart"> = tag("dart");
+export const lua: Tag<"lua"> = tag("lua");
+export const pl: Tag<"pl"> = tag("pl");
+export const r: Tag<"r"> = tag("r");
+export const elm: Tag<"elm"> = tag("elm");
+export const fs: Tag<"fs"> = tag("fs");
+export const clj: Tag<"clj"> = tag("clj");
+export const hs: Tag<"hs"> = tag("hs");
 
 // Configuration files
-export const dockerfile: Ext<"dockerfile"> = ext("dockerfile");
-export const makefile: Ext<"makefile"> = ext("makefile");
-export const mk: Ext<"mk"> = ext("mk");
+export const dockerfile: Tag<"dockerfile"> = tag("dockerfile");
+export const makefile: Tag<"makefile"> = tag("makefile");
+export const mk: Tag<"mk"> = tag("mk");
 
 // Other
-export const svg: Ext<"svg"> = ext("svg");
-export const diff: Ext<"diff"> = ext("diff");
-export const proto: Ext<"proto"> = ext("proto");
-export const sol: Ext<"sol"> = ext("sol");
+export const svg: Tag<"svg"> = tag("svg");
+export const diff: Tag<"diff"> = tag("diff");
+export const proto: Tag<"proto"> = tag("proto");
+export const sol: Tag<"sol"> = tag("sol");

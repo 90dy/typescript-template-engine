@@ -1,5 +1,5 @@
 import { assertEquals } from "@std/assert";
-import { html, css, js, sql, json, md, ext } from "./src/mod.ts";
+import { html, css, tag } from "./src/mod.ts";
 
 Deno.test("HTML template test", () => {
   const title = "Test Title";
@@ -47,7 +47,7 @@ Deno.test("Custom extension template test", () => {
   const name = "Test";
   const version = "1.0.0";
   
-  const result = ext("yaml")`
+  const result = tag("yaml")`
     name: ${name}
     version: ${version}
   `;

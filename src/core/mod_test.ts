@@ -46,7 +46,7 @@ import {
   diff,
   proto,
   sol,
-  ext,
+  tag,
   LANGUAGES,
 } from "./mod.ts";
 
@@ -98,7 +98,7 @@ Deno.test("Core module exports all template functions", () => {
   assertEquals(typeof diff, "function");
   assertEquals(typeof proto, "function");
   assertEquals(typeof sol, "function");
-  assertEquals(typeof ext, "function");
+  assertEquals(typeof tag, "function");
 });
 
 Deno.test("LANGUAGES object contains all supported languages", () => {
@@ -200,7 +200,7 @@ Deno.test("Template indentation works correctly", () => {
 });
 
 Deno.test("Custom extension template works correctly", () => {
-  const customTemplate = ext("custom")`Test content`;
+  const customTemplate = tag("custom")`Test content`;
   
   // Test that the template has the correct type
   assertEquals(customTemplate.type, "custom");
@@ -209,7 +209,7 @@ Deno.test("Custom extension template works correctly", () => {
 
 Deno.test("Template with parser works correctly", () => {
   const parser = (text: string) => ({ parsed: text });
-  const customTemplate = ext("custom", parser)<{ parsed: string }>`Test content`.parse();
+  const customTemplate = tag("custom", parser)<{ parsed: string }>`Test content`.parse();
   
   // Test that the template has parsed data
   assertEquals(customTemplate.data !== undefined, true);

@@ -34,7 +34,7 @@ export {
   svg, diff, proto, sol,
   
   // Language utilities
-  ext,
+  tag,
   type LanguageDefinition,
   LANGUAGES,
 } from "./core/mod.ts";

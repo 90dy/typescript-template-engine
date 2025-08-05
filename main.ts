@@ -26,7 +26,7 @@ import {
   svg, diff, proto, sol,
   
   // Language utilities
-  ext, 
+  tag, 
 } from "./src/mod.ts";
 
 /**

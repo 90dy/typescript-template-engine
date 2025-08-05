@@ -256,7 +256,7 @@ function generateSyntaxConfig(langKey: string, langDef: typeof LANGUAGES[keyof t
  * @returns The grammars section for package.json
  */
 function generatePackageJsonGrammars() {
-  return Object.entries(LANGUAGES).map(([langKey, langDef]) => {
+  return Object.entries(LANGUAGES).map(([_langKey, langDef]) => {
     const extension = langDef.extension;
     
     // Map special language identifiers
