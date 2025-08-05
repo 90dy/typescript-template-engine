@@ -300,12 +300,12 @@ export const LANGUAGES: Record<string, LanguageDefinition> = {
   },
 };
 
-type Template<T> = string & TemplateClass<T>;
+type Template<Type, Data> = string & TemplateClass<Type, Data>;
 
-class TemplateClass<T = unknown> extends String {
+class TemplateClass<Type, Data = unknown> extends String {
   public readonly type: string;
   public readonly raw: string;
-  public data?: T;
+  public data?: Data;
   private error?: Error;
   private parser?: (text: string) => unknown;
   constructor(
@@ -360,8 +360,8 @@ class TemplateClass<T = unknown> extends String {
     return this.valueOf();
    }
 
-  indent(value: false | number): Template<T> {
-    return new TemplateClass<T>(
+  indent(value: false | number): Template<Type, Data> {
+    return new TemplateClass<Type, Data>(
       this.type,
       { raw: [this.raw] },
       [],
@@ -369,27 +369,27 @@ class TemplateClass<T = unknown> extends String {
       {
         indent: value,
       },
-    ) as Template<T>;
+    ) as Template<Type, Data>;
   }
-  noindent(): Template<T> {
+  noindent(): Template<Type, Data> {
     return this.indent(false);
   }
-  throw(): Template<T> | never {
+  throw(): Template<Type, Data> | never {
     if (this.error) {
       throw this.error;
     }
-    return this as unknown as Template<T>;
+    return this as unknown as Template<Type, Data>;
   }
-  parse<TParsed = T>(
-    parser?: (text: string) => TParsed,
-  ): Template<TParsed> {
+  parse<ParsedData = Data>(
+    parser?: (text: string) => ParsedData,
+  ): Template<Type, ParsedData> {
     this.parser = parser ?? this.parser;
     try {
-      this.data = this.parser?.(this.raw) as T;
+      this.data = this.parser?.(this.raw) as Data;
     } catch (error) {
       this.error = error as Error;
     }
-    return this as unknown as Template<TParsed>;
+    return this as unknown as Template<Type, ParsedData>;
   }
 }
 
@@ -406,16 +406,16 @@ export function tag<Type extends string>(
     indent: false | number;
   },
 ): Tag<Type> {
-  return <T>(
+  return <Data>(
     template: { raw: readonly string[] | ArrayLike<string> },
     ...substitutions: any[]
-  ) => new TemplateClass(type, template, substitutions, parser, options) as Template<T>;
+  ) => new TemplateClass(type, template, substitutions, parser, options) as Template<Type, Data>;
 }
 
-type Tag<Type extends string> = <T>(
+export type Tag<Type extends string> = <Data>(
   template: { raw: readonly string[] | ArrayLike<string> },
   ...substitutions: any[]
-) => Template<T>;
+) => Template<Type, Data>;
 
 // Export all template functions individually
 // Web languages
