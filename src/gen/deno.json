@@ -29,5 +29,5 @@
   "bin": {
     "tmpl-gen": "./runner.ts"
   },
-  "version": "0.6.1"
+  "version": "0.6.3"
 }

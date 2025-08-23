@@ -302,7 +302,7 @@ export const LANGUAGES: Record<string, LanguageDefinition> = {
 
 type Template<Type, Data> = string & TemplateClass<Type, Data>;
 
-class TemplateClass<Type, Data = unknown> extends String {
+export class TemplateClass<Type, Data = unknown> extends String {
   public readonly type: string;
   public readonly raw: string;
   public data?: Data;
